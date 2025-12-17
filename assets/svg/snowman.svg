@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Snowman">
+  <defs>
+    <radialGradient id="snowShade" cx="35%" cy="30%" r="70%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e2e8f0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Body -->
+  <circle cx="32" cy="42" r="14" fill="url(#snowShade)" stroke="#fff" stroke-width="1.6" />
+  <circle cx="32" cy="22" r="10" fill="url(#snowShade)" stroke="#fff" stroke-width="1.6" />
+
+  <!-- Hat -->
+  <rect x="24" y="8" width="16" height="5" rx="2" fill="#0f172a" />
+  <rect x="26" y="4" width="12" height="6" rx="2" fill="#0f172a" />
+
+  <!-- Eyes (blink) -->
+  <circle cx="28" cy="20" r="2" fill="#0f172a">
+    <animate attributeName="r" values="2;2;0.1;2;2" keyTimes="0;0.45;0.5;0.55;1" dur="3.2s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="36" cy="20" r="2" fill="#0f172a">
+    <animate attributeName="r" values="2;2;0.1;2;2" keyTimes="0;0.45;0.5;0.55;1" dur="3.2s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- Carrot nose (wiggle) -->
+  <g transform-origin="32 24">
+    <animateTransform attributeName="transform" type="rotate" values="-6 32 24; 6 32 24; -6 32 24" dur="1.6s" repeatCount="indefinite" />
+    <path d="M32 24L46 27L32 30Z" fill="#fb923c" stroke="#fff" stroke-width="1" stroke-linejoin="round" />
+  </g>
+
+  <!-- Buttons -->
+  <circle cx="32" cy="38" r="2" fill="#0f172a" opacity="0.9" />
+  <circle cx="32" cy="46" r="2" fill="#0f172a" opacity="0.9" />
+  <circle cx="32" cy="54" r="2" fill="#0f172a" opacity="0.9" />
+
+  <!-- Floating snowflakes (loop) -->
+  <g opacity="0.8">
+    <g transform-origin="16 14">
+      <animateTransform attributeName="transform" type="translate" values="0 0; 0 3; 0 0" dur="2.4s" repeatCount="indefinite" />
+      <path d="M16 10V18M12 14H20M13.2 11.2L18.8 16.8M18.8 11.2L13.2 16.8" stroke="#fff" stroke-width="1.2" stroke-linecap="round" />
+      <animate attributeName="opacity" values="0.4;0.9;0.4" dur="2.4s" repeatCount="indefinite" />
+    </g>
+    <g transform-origin="50 12">
+      <animateTransform attributeName="transform" type="translate" values="0 0; 0 2; 0 0" dur="2.0s" begin="0.3s" repeatCount="indefinite" />
+      <path d="M50 9V15M47 12H53M47.9 10L52.1 14M52.1 10L47.9 14" stroke="#fff" stroke-width="1.1" stroke-linecap="round" />
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.0s" begin="0.3s" repeatCount="indefinite" />
+    </g>
+  </g>
+</svg>

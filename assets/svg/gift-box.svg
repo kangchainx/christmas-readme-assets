@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Gift box">
+  <defs>
+    <linearGradient id="giftRed" x1="0" y1="20" x2="0" y2="56">
+      <stop offset="0" stop-color="#fb7185"/>
+      <stop offset="1" stop-color="#ef4444"/>
+    </linearGradient>
+    <linearGradient id="giftGold" x1="0" y1="16" x2="0" y2="56">
+      <stop offset="0" stop-color="#fde68a"/>
+      <stop offset="1" stop-color="#fbbf24"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Box base -->
+  <rect x="14" y="26" width="36" height="30" rx="5" fill="url(#giftRed)" stroke="#fff" stroke-width="1.6" />
+  <rect x="30" y="26" width="4" height="30" fill="url(#giftGold)" opacity="0.95" />
+  <rect x="14" y="38" width="36" height="4" fill="url(#giftGold)" opacity="0.95" />
+
+  <!-- Lid (pop) -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0 0; 0 -2; 0 0" dur="1.4s" repeatCount="indefinite" />
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="0 32 24; -2 32 24; 0 32 24" dur="1.4s" repeatCount="indefinite" />
+
+      <rect x="12" y="18" width="40" height="10" rx="5" fill="url(#giftRed)" stroke="#fff" stroke-width="1.6" />
+      <rect x="30" y="18" width="4" height="10" fill="url(#giftGold)" opacity="0.95" />
+
+      <!-- Bow (pulse, scale around 32x18) -->
+      <g transform="translate(32 18)">
+        <g>
+          <animateTransform attributeName="transform" type="scale" values="1; 1.05; 1" dur="1.4s" repeatCount="indefinite" />
+          <g transform="translate(-32 -18)">
+            <path d="M32 18C29 14 25 14 24 17C23 20 28 21 32 18Z" fill="url(#giftGold)" stroke="#fff" stroke-width="1" stroke-linejoin="round" />
+            <path d="M32 18C35 14 39 14 40 17C41 20 36 21 32 18Z" fill="url(#giftGold)" stroke="#fff" stroke-width="1" stroke-linejoin="round" />
+            <circle cx="32" cy="18" r="1.6" fill="#fff" opacity="0.9" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- Shine -->
+  <path d="M18 30C18 40 18 46 18 52" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.25">
+    <animate attributeName="opacity" values="0.12;0.3;0.12" dur="1.8s" repeatCount="indefinite" />
+  </path>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Reindeer">
+  <defs>
+    <linearGradient id="fur" x1="0" y1="18" x2="0" y2="56">
+      <stop offset="0" stop-color="#d97706"/>
+      <stop offset="1" stop-color="#a16207"/>
+    </linearGradient>
+    <linearGradient id="muzzle" x1="0" y1="34" x2="0" y2="56">
+      <stop offset="0" stop-color="#fde68a"/>
+      <stop offset="1" stop-color="#fef3c7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Antlers -->
+  <g fill="none" stroke="#fef3c7" stroke-width="2.2" stroke-linecap="round" opacity="0.95">
+    <path d="M18 16C16 10 18 8 20 8C22 8 23 10 24 12C25 14 27 15 29 15" />
+    <path d="M46 16C48 10 46 8 44 8C42 8 41 10 40 12C39 14 37 15 35 15" />
+  </g>
+
+  <!-- Head -->
+  <circle cx="32" cy="36" r="18" fill="url(#fur)" stroke="#fff" stroke-width="1.6" />
+
+  <!-- Ears -->
+  <g fill="#a16207" stroke="#fff" stroke-width="1.2" stroke-linejoin="round">
+    <path d="M18 30L12 26L14 36Z" />
+    <path d="M46 30L52 26L50 36Z" />
+  </g>
+
+  <!-- Muzzle -->
+  <ellipse cx="32" cy="44" rx="12" ry="9" fill="url(#muzzle)" stroke="#fff" stroke-width="1.4" />
+
+  <!-- Eyes (blink) -->
+  <circle cx="26" cy="34" r="2" fill="#0f172a">
+    <animate attributeName="r" values="2;2;0.1;2;2" keyTimes="0;0.48;0.52;0.56;1" dur="3s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="38" cy="34" r="2" fill="#0f172a">
+    <animate attributeName="r" values="2;2;0.1;2;2" keyTimes="0;0.48;0.52;0.56;1" dur="3s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- Nose (Rudolph pulse) -->
+  <circle cx="32" cy="46" r="3.2" fill="#ef4444" stroke="#fff" stroke-width="1">
+    <animate attributeName="r" values="3.2;3.7;3.2" dur="1.2s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="31" cy="45" r="1" fill="#fff" opacity="0.6">
+    <animate attributeName="opacity" values="0.45;0.8;0.45" dur="1.2s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- Sparkle glow -->
+  <circle cx="32" cy="46" r="7" fill="#ef4444" opacity="0.15">
+    <animate attributeName="opacity" values="0.08;0.18;0.08" dur="1.2s" repeatCount="indefinite" />
+  </circle>
+</svg>

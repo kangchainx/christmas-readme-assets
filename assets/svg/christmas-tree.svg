@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Christmas tree">
+  <defs>
+    <linearGradient id="treeGradient" x1="0" y1="8" x2="0" y2="56">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#15803d"/>
+    </linearGradient>
+    <linearGradient id="trunkGradient" x1="0" y1="54" x2="0" y2="62">
+      <stop offset="0" stop-color="#92400e"/>
+      <stop offset="1" stop-color="#78350f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Gentle sway -->
+  <g transform-origin="32 56">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="-1 32 56; 1 32 56; -1 32 56"
+      dur="3.2s"
+      repeatCount="indefinite"
+    />
+
+    <!-- Star -->
+    <g transform-origin="32 14">
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        values="-10 32 14; 10 32 14; -10 32 14"
+        dur="1.8s"
+        repeatCount="indefinite"
+      />
+      <path
+        d="M32 6L34.4 11.4L40.3 12.3L36 16.4L37 22.2L32 19.6L27 22.2L28 16.4L23.7 12.3L29.6 11.4Z"
+        fill="#fbbf24"
+        stroke="#fff"
+        stroke-width="1.2"
+        stroke-linejoin="round"
+      >
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="1.2s" repeatCount="indefinite" />
+      </path>
+    </g>
+
+    <!-- Tree layers -->
+    <path d="M32 10L20 26H44Z" fill="url(#treeGradient)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+    <path d="M32 20L16 40H48Z" fill="url(#treeGradient)" opacity="0.95" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+    <path d="M32 30L12 56H52Z" fill="url(#treeGradient)" opacity="0.9" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+
+    <!-- Ornaments (twinkle) -->
+    <circle cx="26" cy="26" r="2" fill="#ef4444">
+      <animate attributeName="opacity" values="0.25;1;0.25" dur="1.1s" begin="0s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="38" cy="26" r="2" fill="#22c55e">
+      <animate attributeName="opacity" values="1;0.25;1" dur="1.3s" begin="0.2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="22" cy="38" r="2" fill="#fbbf24">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.4s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="42" cy="38" r="2" fill="#ef4444">
+      <animate attributeName="opacity" values="1;0.3;1" dur="1.0s" begin="0.6s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="28" cy="48" r="2" fill="#22c55e">
+      <animate attributeName="opacity" values="0.25;1;0.25" dur="1.2s" begin="0.3s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="36" cy="48" r="2" fill="#fbbf24">
+      <animate attributeName="opacity" values="1;0.25;1" dur="1.5s" begin="0.1s" repeatCount="indefinite" />
+    </circle>
+
+    <!-- Trunk -->
+    <rect x="28" y="54" width="8" height="8" rx="1.5" fill="url(#trunkGradient)" stroke="#fff" stroke-width="1.2" />
+  </g>
+</svg>

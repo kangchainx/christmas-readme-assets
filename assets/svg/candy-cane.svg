@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Candy cane">
+  <!-- Bounce (looping) -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0 0; 0 -2; 0 0" dur="1.8s" repeatCount="indefinite" />
+
+    <!-- Base cane -->
+    <path
+      d="M24 56V26C24 15 31 9 39 9C47 9 52 15 52 22"
+      fill="none"
+      stroke="#ef4444"
+      stroke-width="10"
+      stroke-linecap="round"
+    />
+
+    <!-- Animated stripes -->
+    <path
+      d="M24 56V26C24 15 31 9 39 9C47 9 52 15 52 22"
+      fill="none"
+      stroke="#fff"
+      stroke-width="4"
+      stroke-linecap="round"
+      stroke-dasharray="8 8"
+    >
+      <animate attributeName="stroke-dashoffset" values="0;16" dur="1.2s" repeatCount="indefinite" />
+    </path>
+
+    <!-- Shine -->
+    <path d="M28 52V30" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.2">
+      <animate attributeName="opacity" values="0.12;0.28;0.12" dur="1.8s" repeatCount="indefinite" />
+    </path>
+  </g>
+</svg>

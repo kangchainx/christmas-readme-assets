@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Christmas stocking">
+  <defs>
+    <linearGradient id="stockingRed" x1="0" y1="10" x2="0" y2="58">
+      <stop offset="0" stop-color="#fb7185"/>
+      <stop offset="1" stop-color="#ef4444"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sway (looping) -->
+  <g transform-origin="26 12">
+    <animateTransform attributeName="transform" type="rotate" values="-4 26 12; 4 26 12; -4 26 12" dur="2.6s" repeatCount="indefinite" />
+
+    <!-- Cuff -->
+    <rect x="18" y="10" width="28" height="10" rx="3" fill="#fff" opacity="0.96" />
+    <path d="M20 15H44" stroke="#e2e8f0" stroke-width="1.2" stroke-linecap="round" opacity="0.6" />
+
+    <!-- Body -->
+    <path
+      d="M20 12H44V30C44 39 40 44 37 46L41 53C42 55 41 58 36 58H22C15 58 14 53 14 48V12H20Z"
+      fill="url(#stockingRed)"
+      stroke="#fff"
+      stroke-width="1.6"
+      stroke-linejoin="round"
+    />
+
+    <!-- Sparkle (blink) -->
+    <g>
+      <path d="M44 44L46 46L44 48L42 46Z" fill="#fbbf24">
+        <animate attributeName="opacity" values="0;1;0" dur="1.4s" repeatCount="indefinite" />
+      </path>
+      <path d="M48 46L49 47L48 48L47 47Z" fill="#fbbf24" opacity="0.8">
+        <animate attributeName="opacity" values="0;0.8;0" dur="1.4s" begin="0.2s" repeatCount="indefinite" />
+      </path>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Christmas wreath">
+  <defs>
+    <linearGradient id="wreathGreen" x1="0" y1="12" x2="0" y2="52">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#16a34a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Slow spin (looping) -->
+  <g transform-origin="32 32">
+    <animateTransform attributeName="transform" type="rotate" values="0 32 32; 360 32 32" dur="10s" repeatCount="indefinite" />
+
+    <!-- Ring -->
+    <circle cx="32" cy="32" r="18" fill="none" stroke="url(#wreathGreen)" stroke-width="8" stroke-linecap="round" />
+
+    <!-- Berries (twinkle) -->
+    <circle cx="32" cy="14" r="3.2" fill="#ef4444">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="1.6s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="50" cy="32" r="3.2" fill="#ef4444">
+      <animate attributeName="opacity" values="1;0.4;1" dur="1.8s" begin="0.2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="32" cy="50" r="3.2" fill="#ef4444">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="1.7s" begin="0.4s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="14" cy="32" r="3.2" fill="#ef4444">
+      <animate attributeName="opacity" values="1;0.5;1" dur="1.9s" begin="0.1s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- Bow (pulse) -->
+  <g transform="translate(32 46)">
+    <g>
+      <animateTransform attributeName="transform" type="scale" values="1; 1.06; 1" dur="1.6s" repeatCount="indefinite" />
+      <g transform="translate(-32 -46)">
+        <path d="M32 46C28 42 22 42 22 46C22 50 28 50 32 46Z" fill="#ef4444" stroke="#fff" stroke-width="1" stroke-linejoin="round" />
+        <path d="M32 46C36 42 42 42 42 46C42 50 36 50 32 46Z" fill="#ef4444" stroke="#fff" stroke-width="1" stroke-linejoin="round" />
+        <circle cx="32" cy="46" r="2" fill="#fff" opacity="0.9" />
+      </g>
+    </g>
+  </g>
+</svg>

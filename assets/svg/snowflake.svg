@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Snowflake">
+  <!-- Spin + pulse (looping) -->
+  <g transform-origin="32 32">
+    <animateTransform attributeName="transform" type="rotate" values="0 32 32; 360 32 32" dur="6s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="2.4s" repeatCount="indefinite" />
+
+    <g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+      <path d="M32 10V54" />
+      <path d="M10 32H54" />
+      <path d="M16 16L48 48" />
+      <path d="M48 16L16 48" />
+
+      <!-- Tips -->
+      <path d="M32 10L28 14M32 10L36 14" />
+      <path d="M32 54L28 50M32 54L36 50" />
+      <path d="M10 32L14 28M10 32L14 36" />
+      <path d="M54 32L50 28M54 32L50 36" />
+      <path d="M16 16L16 22M16 16L22 16" />
+      <path d="M48 48L48 42M48 48L42 48" />
+      <path d="M48 16L42 16M48 16L48 22" />
+      <path d="M16 48L22 48M16 48L16 42" />
+    </g>
+
+    <!-- Center crystal -->
+    <circle cx="32" cy="32" r="3" fill="#e2e8f0" opacity="0.9" />
+  </g>
+</svg>

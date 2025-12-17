@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Santa hat">
+  <defs>
+    <linearGradient id="hatRed" x1="0" y1="14" x2="0" y2="52">
+      <stop offset="0" stop-color="#fb7185"/>
+      <stop offset="1" stop-color="#ef4444"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Float + tilt (looping) -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0 0; 0 -2; 0 0" dur="1.6s" repeatCount="indefinite" />
+    <g transform-origin="32 44">
+      <animateTransform attributeName="transform" type="rotate" values="-3 32 44; 3 32 44; -3 32 44" dur="1.6s" repeatCount="indefinite" />
+
+      <!-- Cap -->
+      <path
+        d="M14 44C16 26 30 14 44 18C54 21 56 35 48 41C41 45 34 40 26 46C21 50 16 48 14 44Z"
+        fill="url(#hatRed)"
+        stroke="#fff"
+        stroke-width="1.6"
+        stroke-linejoin="round"
+      />
+
+      <!-- Brim -->
+      <rect x="12" y="42" width="40" height="10" rx="5" fill="#fff" opacity="0.95" />
+      <path d="M14 47H50" stroke="#e2e8f0" stroke-width="1.4" stroke-linecap="round" opacity="0.6" />
+
+      <!-- Pom-pom (bounce) -->
+      <circle cx="50" cy="34" r="6" fill="#fff" opacity="0.96">
+        <animate attributeName="r" values="6;6.6;6" dur="1.6s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="48" cy="32" r="2" fill="#e2e8f0" opacity="0.6">
+        <animate attributeName="r" values="2;2.3;2" dur="1.6s" repeatCount="indefinite" />
+      </circle>
+    </g>
+  </g>
+</svg>
