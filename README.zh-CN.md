@@ -5,7 +5,7 @@
 仅提供圣诞节主题 SVG 图标，用于装点 GitHub Profile README。  
 本项目不提供个人主页/README 的整体设计或生成。
 
-在线演示：https://kangchainx.github.io/christmas-readme-assets/
+在线演示：https://kangchainx.github.io/github-christmas-kit/
 
 ## 项目内容
 
@@ -20,11 +20,11 @@
 
 ### Base URL（图标地址前缀）
 
-- GitHub Pages 图标 Base URL： https://kangchainx.github.io/christmas-readme-assets/assets/svg/
+- GitHub Pages 图标 Base URL： https://kangchainx.github.io/github-christmas-kit/assets/svg/
 - 示例（Markdown）：
 
 ```md
-[![Santa Hat](https://kangchainx.github.io/christmas-readme-assets/assets/svg/santa-hat.svg)](https://kangchainx.github.io/christmas-readme-assets/)
+[![Santa Hat](https://kangchainx.github.io/github-christmas-kit/assets/svg/santa-hat.svg)](https://kangchainx.github.io/github-christmas-kit/)
 ```
 
 ## 本地运行

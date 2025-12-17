@@ -5,7 +5,7 @@
 Christmas-only SVG icons for decorating your GitHub Profile README.  
 This kit does not generate full profile designs or README layouts.
 
-Live demo: https://kangchainx.github.io/christmas-readme-assets/
+Live demo: https://kangchainx.github.io/github-christmas-kit/
 
 ## What’s inside
 
@@ -20,11 +20,11 @@ Live demo: https://kangchainx.github.io/christmas-readme-assets/
 
 ### Base URL
 
-- GitHub Pages base URL: https://kangchainx.github.io/christmas-readme-assets/assets/svg/
+- GitHub Pages base URL: https://kangchainx.github.io/github-christmas-kit/assets/svg/
 - Example (Markdown):
 
 ```md
-[![Santa Hat](https://kangchainx.github.io/christmas-readme-assets/assets/svg/santa-hat.svg)](https://kangchainx.github.io/christmas-readme-assets/)
+[![Santa Hat](https://kangchainx.github.io/github-christmas-kit/assets/svg/santa-hat.svg)](https://kangchainx.github.io/github-christmas-kit/)
 ```
 
 ## Run locally
