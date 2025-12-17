@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Profile Christmas Kit 🎄</title>
-    
-    <!-- Google Fonts: Fredoka for that round, friendly look -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&display=swap" rel="stylesheet">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title>GitHub Profile Christmas Kit 🎄</title>
+
+	    <!-- Favicons -->
+	    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+	    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+	    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+	    <link rel="icon" href="assets/favicon/favicon.ico">
+	    <link rel="manifest" href="assets/favicon/site.webmanifest">
+	    
+	    <!-- Google Fonts: Fredoka for that round, friendly look -->
+	    <link rel="preconnect" href="https://fonts.googleapis.com">
+	    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -171,8 +178,275 @@
 <body>
     <div id="root"></div>
 
-    <script type="text/babel">
-        const { useState, useEffect, useRef, useCallback } = React;
+	    <script type="text/babel">
+	        const { useState, useEffect, useRef, useCallback, useMemo, useContext } = React;
+
+	        // --- i18n (EN / 中文) ---
+		        const I18N_STRINGS = {
+		            en: {
+		                header: {
+		                    desc: 'Christmas-only SVG icons for decorating your GitHub Profile README.',
+		                    disclaimer: 'This kit does not generate full profile designs or README layouts.',
+		                },
+		                controls: {
+		                    help: 'Help',
+		                    language: 'Language',
+		                    github: 'GitHub',
+		                },
+			                search: {
+			                    placeholder: 'A wave of icons is on the way…',
+			                    clear: 'Clear',
+			                    empty: 'No matching icons.',
+			                },
+		                tooltip: {
+		                    help: 'How to use',
+		                    github: 'Open GitHub repo',
+		                    guide: 'Contributing guide',
+		                    visitors: 'Visitors',
+		                    toggleLang: 'Switch language',
+		                    langZh: '中文',
+		                    langEn: 'English',
+		                    close: 'Close',
+		                },
+		                icons: {
+		                    tree: 'Christmas Tree',
+		                    gift: 'Gift Box',
+		                    snowman: 'Snowman',
+		                    stocking: 'Red Stocking',
+		                    bell: 'Jingle Bell',
+		                    candy: 'Candy Cane',
+		                    hat: 'Santa Hat',
+		                    wreath: 'Wreath',
+		                    reindeer: 'Reindeer',
+		                    snowflake: 'Snowflake',
+		                },
+		                iconCard: {
+		                    copyMarkdown: 'Copy Markdown',
+		                    copyUrl: 'Copy URL',
+		                    copyHtml: 'Copy HTML',
+		                    download: 'Download SVG',
+		                },
+	                formats: {
+	                    markdown: 'Markdown',
+	                    url: 'URL',
+	                    html: 'HTML',
+	                },
+	                toast: {
+	                    title: 'Notification',
+	                    copied: 'Copied {what}!',
+	                    downloaded: 'Downloaded SVG!',
+	                    clipboardUnavailable: 'Clipboard unavailable. Try HTTPS / local server.',
+	                    promptCopied: 'AI prompt copied!',
+	                    templateCopied: 'Prompt template copied!',
+	                    customDownloaded: 'Custom icon downloaded!',
+	                },
+		                usage: {
+		                    title: 'Quick Start',
+		                    subtitle: 'This site only provides Christmas-themed SVG icons for GitHub Profile READMEs.',
+		                    subtitle2: 'It is not a full profile/README generator.',
+		                    step1Title: 'Pick an icon & copy',
+		                    step1Desc: 'Find an icon you like and copy the snippet (Markdown / URL / HTML) from its card.',
+		                    step2Title: 'Install on your GitHub Profile',
+		                    step2Desc: 'Open your GitHub Profile README (repo named <your-username>/<your-username>), paste it, commit, then refresh your profile.',
+		                    gifSlot: 'GIF slot (Step {step})',
+		                    tip: 'Tip: opening via file:// may block clipboard. Use HTTPS / local server.',
+		                    gotIt: 'Got it',
+		                },
+		                lab: {
+		                    beta: 'Beta',
+		                    title: 'Contributor Lab',
+		                    desc: 'Design your own icon or use AI to generate one, then test it here.',
+		                    copyPrompt: 'Copy AI Prompt',
+		                    inputLabel: 'SVG Path / Code',
+		                    inputPlaceholder: 'Paste your <path> or full <svg> here…',
+		                    tip: 'Tip: Ensure viewBox is 0 0 64 64 for best results.',
+		                    preview: 'Live Preview',
+		                    download: 'Download',
+		                    aiPrompt:
+		                        `Create an animated SVG icon of a Santa Hat with viewBox="0 0 64 64" (transparent background). Style: bold, cute, and readable on a dark background.
+
+Colors & structure:
+- Red cap with a subtle vertical gradient (top #fb7185 → bottom #ef4444), use a linearGradient id="hatRed"
+- Soft white brim (rounded rect/path), optional light gray highlight line
+- White pom-pom (circle) on the tip
+
+Looping animations (repeatCount="indefinite"):
+- Float the whole hat up/down with animateTransform translate: "0 0; 0 -2; 0 0" dur="1.6s"
+- Slight tilt with animateTransform rotate around (32,44): "-3 32 44; 3 32 44; -3 32 44" dur="1.6s"
+- Pom-pom bounce by animating its radius: "6; 6.6; 6" dur="1.6s"
+
+Return only the SVG code (no markdown). Keep it self-contained (no external assets). To create other icons in the same style, replace “Santa Hat” with another Christmas item.`,
+		                },
+		                footer: {
+		                    builtWith: 'Built with React, Tailwind & Holiday Spirit 🎅',
+		                    contributing: 'Contributing Guide',
+		                },
+		                legal: {
+		                    line1: 'The contents of this website are',
+		                    line2Prefix: '© {year} under the terms of the',
+		                    license: 'MIT License',
+		                },
+		                thanks: {
+		                    prefix: 'Proudly hosted by',
+		                    host: 'GitHub Pages',
+		                    suffix: '',
+		                    line2: 'Thanks to all contributors!',
+		                },
+		                starPrompt: {
+		                    message: 'Open source takes time — if this kit helps, please consider starring the repo.',
+		                    cta: 'Star on GitHub',
+		                },
+		                guide: {
+		                    title: '🎄 Contributing Guide',
+		                    back: 'Back to Kit',
+		                    promptLabel: 'Prompt Template',
+	                    copy: 'Copy',
+	                },
+	                common: {
+	                    back: 'Back',
+	                },
+	            },
+		            zh: {
+		                header: {
+		                    desc: '仅提供圣诞节主题 SVG 图标，用于装点 GitHub Profile README。',
+		                    disclaimer: '本工具不提供个人主页/README 的整体设计或生成。',
+		                },
+		                controls: {
+		                    help: '使用帮助',
+		                    language: '语言',
+		                    github: 'GitHub',
+		                },
+			                search: {
+			                    placeholder: '一大波图标正在路上...',
+			                    clear: '清空',
+			                    empty: '没有匹配的图标。',
+			                },
+		                tooltip: {
+		                    help: '使用说明',
+		                    github: '打开 GitHub 仓库',
+		                    guide: '贡献指引',
+		                    visitors: '访问量',
+		                    toggleLang: '切换语言',
+		                    langZh: '中文',
+		                    langEn: 'English',
+		                    close: '关闭',
+		                },
+		                icons: {
+		                    tree: '圣诞树',
+		                    gift: '礼物盒',
+		                    snowman: '雪人',
+		                    stocking: '圣诞袜',
+		                    bell: '铃铛',
+		                    candy: '拐杖糖',
+		                    hat: '圣诞帽',
+		                    wreath: '花环',
+		                    reindeer: '驯鹿',
+		                    snowflake: '雪花',
+		                },
+		                iconCard: {
+		                    copyMarkdown: '复制 Markdown',
+		                    copyUrl: '复制 URL',
+		                    copyHtml: '复制 HTML',
+		                    download: '下载 SVG',
+		                },
+	                formats: {
+	                    markdown: 'Markdown',
+	                    url: 'URL',
+	                    html: 'HTML',
+	                },
+	                toast: {
+	                    title: '提示',
+	                    copied: '已复制 {what}！',
+	                    downloaded: '已下载 SVG！',
+	                    clipboardUnavailable: '剪贴板不可用，请使用 HTTPS / 本地服务。',
+	                    promptCopied: '已复制 AI 提示词！',
+	                    templateCopied: '已复制提示词模板！',
+	                    customDownloaded: '已下载自定义图标！',
+	                },
+		                usage: {
+		                    title: '使用说明',
+		                    subtitle: '本站仅提供圣诞节主题 SVG 图标，用于 GitHub Profile README。',
+		                    subtitle2: '不是个人主页/README 的整体生成器。',
+		                    step1Title: '选择图标并复制',
+		                    step1Desc: '找到你喜欢的图标，在卡片上点击 Markdown / URL / HTML 完成复制。',
+		                    step2Title: '打开 GitHub 个人主页并安装',
+		                    step2Desc: '打开你的 GitHub Profile README（与用户名同名仓库的 README），粘贴后提交保存，然后刷新个人主页查看效果。',
+		                    gifSlot: 'GIF 占位（步骤 {step}）',
+		                    tip: '提示：直接用 file:// 打开可能禁用剪贴板，建议 HTTPS / 本地服务。',
+		                    gotIt: '我知道了',
+		                },
+		                lab: {
+		                    beta: 'Beta',
+		                    title: '贡献者实验室',
+		                    desc: '你可以自己设计图标，或用 AI 生成，然后在这里测试预览。',
+		                    copyPrompt: '复制 AI 提示词',
+		                    inputLabel: 'SVG Path / 代码',
+		                    inputPlaceholder: '粘贴你的 <path> 或完整 <svg> 代码…',
+		                    tip: '提示：请确保 viewBox 为 0 0 64 64。',
+		                    preview: '实时预览',
+		                    download: '下载',
+		                    aiPrompt:
+		                        `请生成一个“圣诞帽（Santa Hat）”的 SVG 小图标，viewBox="0 0 64 64"，透明背景，适合暗色背景展示。风格要简洁可爱、线条清晰、形状大胆。
+
+配色与结构：
+- 帽身为红色，并带轻微的竖向渐变：顶部 #fb7185 → 底部 #ef4444（linearGradient id="hatRed"）
+- 帽檐为柔和的白色（圆角矩形/路径），可加一条浅灰高光线
+- 帽尖有一个白色绒球（circle）
+
+动画（循环播放 repeatCount="indefinite"）：
+- 整体上下漂浮：animateTransform translate 值 "0 0; 0 -2; 0 0"，dur="1.6s"
+- 轻微左右摇摆：animateTransform rotate 围绕 (32,44) 值 "-3 32 44; 3 32 44; -3 32 44"，dur="1.6s"
+- 绒球轻微弹跳：circle 的 r 值 "6; 6.6; 6"，dur="1.6s"
+
+请只返回 SVG 代码（不要 markdown 包裹），不要引用外部资源，保持代码简洁。想生成其他同风格图标，把“圣诞帽”替换为其他圣诞元素即可。`,
+		                },
+		                footer: {
+		                    builtWith: '由 React、Tailwind 与节日灵感构建 🎅',
+		                    contributing: '如何贡献',
+		                },
+		                legal: {
+		                    line1: '本网站内容',
+		                    line2Prefix: '© {year}，遵循',
+		                    license: 'MIT License',
+		                },
+		                thanks: {
+		                    prefix: '由',
+		                    host: 'GitHub Pages',
+		                    suffix: '托管',
+		                    line2: '感谢所有贡献者！',
+		                },
+		                starPrompt: {
+		                    message: '开源不易，如果你喜欢这个项目，欢迎点个 Star 支持一下～',
+		                    cta: '去 GitHub 点 Star',
+		                },
+		                guide: {
+		                    title: '🎄 如何贡献',
+		                    back: '返回工具页',
+		                    promptLabel: '提示词模板',
+	                    copy: '复制',
+	                },
+	                common: {
+	                    back: '返回',
+	                },
+	            },
+	        };
+
+	        const I18nContext = React.createContext({
+	            lang: 'en',
+	            setLang: () => {},
+	            t: (key, vars) => key,
+	        });
+
+	        const getI18nValue = (lang, key) => {
+	            const segments = key.split('.');
+	            let current = I18N_STRINGS[lang];
+	            for (const segment of segments) current = current?.[segment];
+	            if (typeof current === 'string') return current;
+	            return undefined;
+	        };
+
+	        const formatTemplate = (template, vars = {}) =>
+	            template.replace(/\{(\w+)\}/g, (_, name) => (vars[name] ?? `{${name}}`));
 
         // --- Data: SVG Collection ---
         const CHRISTMAS_ICONS = [
@@ -308,29 +582,292 @@
             return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full pointer-events-none z-0" />;
         };
 
-        // --- Component: Toast ---
-        const Toast = ({ message, isVisible, type = 'success' }) => {
-            if (!isVisible) return null;
+        // --- Component: ClickCheerEffect ---
+        // Festive burst on pointer interactions (dark-mode friendly).
+        const ClickCheerEffect = () => {
+            const canvasRef = useRef(null);
+            const animationIdRef = useRef(null);
+            const particlesRef = useRef([]);
+            const prefersReducedMotion = useRef(false);
+	            const lastBurstAtRef = useRef(0);
+	            const pendingBurstRef = useRef(null);
+	            const cooldownTimerRef = useRef(null);
+
+            useEffect(() => {
+                prefersReducedMotion.current = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+            }, []);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                const ctx = canvas.getContext('2d');
+	                const BURST_COOLDOWN_MS = 160;
+
+                const resize = () => {
+                    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                    canvas.width = Math.floor(window.innerWidth * dpr);
+                    canvas.height = Math.floor(window.innerHeight * dpr);
+                    canvas.style.width = `${window.innerWidth}px`;
+                    canvas.style.height = `${window.innerHeight}px`;
+                    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                };
+
+                const colors = ['#ef4444', '#22c55e', '#fbbf24', 'rgba(248,250,252,0.95)'];
+
+                const rand = (min, max) => Math.random() * (max - min) + min;
+
+                const spawnBurst = (x, y) => {
+                    if (prefersReducedMotion.current) return;
+
+                    const count = 18 + Math.floor(Math.random() * 10);
+                    for (let i = 0; i < count; i++) {
+                        const angle = rand(0, Math.PI * 2);
+                        const speed = rand(2.2, 6.2);
+                        const typeRoll = Math.random();
+                        const type =
+                            typeRoll < 0.55 ? 'spark' :
+                            typeRoll < 0.8 ? 'star' :
+                            'flake';
+
+                        particlesRef.current.push({
+                            x,
+                            y,
+                            vx: Math.cos(angle) * speed,
+                            vy: Math.sin(angle) * speed - rand(0.6, 2.0),
+                            r: rand(2.2, 4.8),
+                            rot: rand(0, Math.PI * 2),
+                            vr: rand(-0.18, 0.18),
+                            life: 0,
+                            ttl: rand(520, 920),
+                            color: colors[Math.floor(Math.random() * colors.length)],
+                            type,
+                        });
+                    }
+
+                    // Cap for performance
+                    if (particlesRef.current.length > 260) {
+                        particlesRef.current.splice(0, particlesRef.current.length - 260);
+                    }
+                };
+
+                const drawStar = (cx, cy, spikes, outerR, innerR, rotation) => {
+                    ctx.beginPath();
+                    let rot = (Math.PI / 2) * 3 + rotation;
+                    const step = Math.PI / spikes;
+                    ctx.moveTo(cx, cy - outerR);
+                    for (let i = 0; i < spikes; i++) {
+                        ctx.lineTo(cx + Math.cos(rot) * outerR, cy + Math.sin(rot) * outerR);
+                        rot += step;
+                        ctx.lineTo(cx + Math.cos(rot) * innerR, cy + Math.sin(rot) * innerR);
+                        rot += step;
+                    }
+                    ctx.closePath();
+                };
+
+                const drawFlake = (cx, cy, r, rotation) => {
+                    ctx.save();
+                    ctx.translate(cx, cy);
+                    ctx.rotate(rotation);
+                    ctx.beginPath();
+                    ctx.moveTo(-r, 0);
+                    ctx.lineTo(r, 0);
+                    ctx.moveTo(0, -r);
+                    ctx.lineTo(0, r);
+                    ctx.moveTo(-r * 0.75, -r * 0.75);
+                    ctx.lineTo(r * 0.75, r * 0.75);
+                    ctx.moveTo(r * 0.75, -r * 0.75);
+                    ctx.lineTo(-r * 0.75, r * 0.75);
+                    ctx.stroke();
+                    ctx.restore();
+                };
+
+                const tick = (time) => {
+                    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+                    const now = performance.now();
+                    const particles = particlesRef.current;
+                    for (let i = particles.length - 1; i >= 0; i--) {
+                        const p = particles[i];
+                        p.life += 16.6; // approximate; good enough for visual effect
+
+                        const t = Math.min(p.life / p.ttl, 1);
+                        const alpha = (1 - t) * (1 - t);
+
+                        p.vx *= 0.985;
+                        p.vy = p.vy * 0.985 + 0.06; // gentle gravity
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.rot += p.vr;
+
+                        ctx.save();
+                        ctx.globalAlpha = alpha;
+                        ctx.shadowColor = p.color;
+                        ctx.shadowBlur = 10;
+
+                        if (p.type === 'spark') {
+                            ctx.fillStyle = p.color;
+                            ctx.beginPath();
+                            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                            ctx.fill();
+                        } else if (p.type === 'star') {
+                            ctx.fillStyle = p.color;
+                            drawStar(p.x, p.y, 5, p.r * 1.6, p.r * 0.7, p.rot);
+                            ctx.fill();
+                        } else {
+                            ctx.strokeStyle = p.color;
+                            ctx.lineWidth = 1.4;
+                            drawFlake(p.x, p.y, p.r * 1.5, p.rot);
+                        }
+
+                        ctx.restore();
+
+                        if (t >= 1 || p.x < -50 || p.x > window.innerWidth + 50 || p.y > window.innerHeight + 80) {
+                            particles.splice(i, 1);
+                        }
+                    }
+
+                    // Keep animating while there are particles
+                    if (particlesRef.current.length > 0) {
+                        animationIdRef.current = requestAnimationFrame(tick);
+                    } else {
+                        animationIdRef.current = null;
+                    }
+                };
+
+	                const runBurst = (x, y) => {
+	                    spawnBurst(x, y);
+	                    if (!animationIdRef.current) {
+	                        animationIdRef.current = requestAnimationFrame(tick);
+	                    }
+	                };
+
+	                const requestBurst = (x, y) => {
+	                    const now = performance.now();
+	                    const elapsed = now - lastBurstAtRef.current;
+	                    if (elapsed >= BURST_COOLDOWN_MS) {
+	                        lastBurstAtRef.current = now;
+	                        runBurst(x, y);
+	                        return;
+	                    }
+
+	                    pendingBurstRef.current = { x, y };
+	                    if (cooldownTimerRef.current) return;
+	                    const wait = Math.max(0, BURST_COOLDOWN_MS - elapsed);
+	                    cooldownTimerRef.current = window.setTimeout(() => {
+	                        cooldownTimerRef.current = null;
+	                        const pending = pendingBurstRef.current;
+	                        pendingBurstRef.current = null;
+	                        if (!pending) return;
+	                        lastBurstAtRef.current = performance.now();
+	                        runBurst(pending.x, pending.y);
+	                    }, wait);
+	                };
+
+                const onPointerDown = (e) => {
+                    // Ignore right-click / non-primary
+                    if (e.button != null && e.button !== 0) return;
+	                    requestBurst(e.clientX, e.clientY);
+                };
+
+                resize();
+                window.addEventListener('resize', resize);
+                window.addEventListener('pointerdown', onPointerDown, { passive: true });
+
+                return () => {
+                    window.removeEventListener('resize', resize);
+                    window.removeEventListener('pointerdown', onPointerDown);
+	                    if (cooldownTimerRef.current) {
+	                        window.clearTimeout(cooldownTimerRef.current);
+	                        cooldownTimerRef.current = null;
+	                    }
+	                    pendingBurstRef.current = null;
+                    if (animationIdRef.current) cancelAnimationFrame(animationIdRef.current);
+                };
+            }, []);
 
             return (
-                <div className={`fixed bottom-8 right-8 z-50 flex items-center gap-3 px-6 py-4 rounded-xl shadow-2xl glass-panel animate-[slideIn_0.3s_ease-out] border-l-4 ${type === 'success' ? 'border-green-500' : 'border-red-500'}`}>
-                    <div className={`p-2 rounded-full ${type === 'success' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
-                        {type === 'success' ? <i className="ph-fill ph-check-circle text-xl"></i> : <i className="ph-fill ph-warning-circle text-xl"></i>}
-                    </div>
-                    <div>
-                        <h4 className="font-semibold text-white text-sm">Notification</h4>
-                        <p className="text-slate-300 text-xs">{message}</p>
-                    </div>
-                </div>
+                <canvas
+                    ref={canvasRef}
+                    className="fixed inset-0 pointer-events-none z-20"
+                    aria-hidden="true"
+                />
             );
         };
 
-        // --- Component: UsageModal ---
-        const UsageModal = ({ isOpen, onClose, baseUrl, repoUrl }) => {
-            useEffect(() => {
-                if (!isOpen) return;
+		        // --- Component: Toast ---
+		        const Toast = ({ message, isVisible, type = 'success' }) => {
+		            const { t } = useContext(I18nContext);
+		            if (!isVisible) return null;
 
-                const onKeyDown = (e) => {
+		            return (
+		                <div className={`fixed bottom-8 right-8 z-50 flex items-center gap-3 px-6 py-4 rounded-xl shadow-2xl glass-panel animate-[slideIn_0.3s_ease-out] border-l-4 ${type === 'success' ? 'border-green-500' : 'border-red-500'}`}>
+		                    <div className={`p-2 rounded-full ${type === 'success' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+		                        {type === 'success' ? <i className="ph-fill ph-check-circle text-xl"></i> : <i className="ph-fill ph-warning-circle text-xl"></i>}
+		                    </div>
+		                    <div>
+		                        <h4 className="font-semibold text-white text-sm">{t('toast.title')}</h4>
+		                        <p className="text-slate-300 text-xs">{message}</p>
+		                    </div>
+		                </div>
+		            );
+		        };
+
+		        // --- Component: CornerNotes ---
+		        // Bottom license + thanks text (theme-matched).
+			        const CornerNotes = ({ repoUrl }) => {
+			            const { t, lang } = useContext(I18nContext);
+			            const year = new Date().getFullYear();
+			            const licenseUrl = `${repoUrl}/blob/main/LICENSE`;
+			            const githubPagesUrl = 'https://pages.github.com/';
+
+			            return (
+			                <div className="pt-6 border-t border-slate-800/60">
+			                    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 text-xs text-slate-500/90">
+			                        <div className="leading-relaxed">
+			                            <div>{t('legal.line1')}</div>
+			                            <div>
+		                                {t('legal.line2Prefix', { year })}{' '}
+		                                <a
+		                                    href={licenseUrl}
+		                                    target="_blank"
+		                                    rel="noreferrer"
+		                                    className="text-slate-300 hover:text-white underline underline-offset-4"
+		                                >
+		                                    {t('legal.license')}
+		                                </a>
+		                                {lang === 'zh' ? '。' : '.'}
+		                            </div>
+			                        </div>
+
+			                        <div className="sm:text-right leading-relaxed">
+			                            <div className="text-slate-400/90 mb-1">{t('footer.builtWith')}</div>
+			                            <div>
+			                                {t('thanks.prefix')}{' '}
+			                                <a
+			                                    href={githubPagesUrl}
+		                                    target="_blank"
+		                                    rel="noreferrer"
+		                                    className="text-slate-300 hover:text-white underline underline-offset-4"
+		                                >
+		                                    {t('thanks.host')}
+		                                </a>
+		                                {t('thanks.suffix') ? ` ${t('thanks.suffix')}` : ''}
+		                                {lang === 'zh' ? '。' : '.'}
+			                            </div>
+			                            <div className="text-slate-400/90">{t('thanks.line2')}</div>
+			                        </div>
+			                    </div>
+			                </div>
+			            );
+			        };
+
+		        // --- Component: UsageModal ---
+		        const UsageModal = ({ isOpen, onClose, baseUrl, repoUrl }) => {
+		            const { t, lang } = useContext(I18nContext);
+
+	            useEffect(() => {
+	                if (!isOpen) return;
+
+	                const onKeyDown = (e) => {
                     if (e.key === 'Escape') onClose();
                 };
 
@@ -347,127 +884,113 @@
                         onClick={onClose}
                         aria-hidden="true"
                     />
-                    <div className="relative w-full max-w-2xl glass-panel rounded-3xl p-6 md:p-8 border border-slate-700/50 shadow-2xl">
-                        <div className="flex items-start justify-between gap-4 mb-6">
-                            <div>
-                                <h2 className="text-xl md:text-2xl font-bold text-white">使用说明 / Quick Start</h2>
-                                <p className="text-slate-400 text-sm mt-1">
-                                    本站仅提供圣诞节主题 SVG 图标，用于装点 GitHub Profile README（不是个人主页设计/生成器）。
-                                </p>
-                            </div>
-                            <button
-                                type="button"
-                                onClick={onClose}
-                                className="app-tooltip p-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors"
-                                aria-label="Close"
-                                data-tooltip="Close"
-                            >
-                                <i className="ph ph-x text-xl"></i>
-                            </button>
-                        </div>
+	                    <div className="relative w-full max-w-2xl glass-panel rounded-3xl p-6 md:p-8 border border-slate-700/50 shadow-2xl">
+	                        <div className="flex items-start justify-between gap-4 mb-6">
+	                            <div>
+	                                <h2 className="text-xl md:text-2xl font-bold text-white">{t('usage.title')}</h2>
+	                                <p className="text-slate-400 text-sm mt-1">
+	                                    {t('usage.subtitle')} {t('usage.subtitle2')}
+	                                </p>
+	                            </div>
+	                            <button
+	                                type="button"
+	                                onClick={onClose}
+	                                className="app-tooltip p-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors"
+	                                aria-label={t('tooltip.close')}
+	                                data-tooltip={t('tooltip.close')}
+	                            >
+	                                <i className="ph ph-x text-xl"></i>
+	                            </button>
+	                        </div>
 
-                        <div className="space-y-4 text-sm text-slate-300">
-                            <div className="flex gap-3">
-                                <div className="w-7 h-7 rounded-lg bg-green-500/15 text-green-300 flex items-center justify-center font-semibold shrink-0">1</div>
-                                <div>
-                                    <div className="text-white font-medium">设置图标仓库 Base URL</div>
-                                    <div className="text-slate-400">
-                                        复制时会用到该地址（默认已指向在线图标仓库）。你也可以改成自己的静态托管地址。
-                                    </div>
-                                    <div className="mt-2 flex flex-col sm:flex-row gap-2">
-                                        <a
-                                            href={baseUrl}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-slate-800/60 hover:bg-slate-700/70 border border-slate-700 text-slate-200 transition-colors"
-                                        >
-                                            <i className="ph ph-arrow-square-out"></i>
-                                            Open Base URL
-                                        </a>
-                                        <a
-                                            href={repoUrl}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-slate-800/60 hover:bg-slate-700/70 border border-slate-700 text-slate-200 transition-colors"
-                                        >
-                                            <i className="ph ph-github-logo"></i>
-                                            Browse Icons Repo
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+		                        <div className="space-y-4 text-sm text-slate-300">
+		                            <div className="flex gap-3">
+		                                <div className="w-7 h-7 rounded-lg bg-green-500/15 text-green-300 flex items-center justify-center font-semibold shrink-0">1</div>
+		                                <div className="flex-1">
+			                                    <div className="text-white font-medium">{t('usage.step1Title')}</div>
+			                                    <div className="text-slate-400">{t('usage.step1Desc')}</div>
+			                                    <div className="mt-3 inline-flex max-w-full rounded-xl border border-slate-700/60 bg-slate-950/20 overflow-hidden">
+			                                        <video
+			                                            src="assets/mp4/github_christmas_kit_help_step1.mp4"
+			                                            className="h-32 md:h-40 w-auto max-w-full object-contain bg-slate-950/30"
+			                                            autoPlay
+			                                            loop
+			                                            muted
+			                                            playsInline
+			                                            preload="metadata"
+			                                        />
+			                                    </div>
+			                                </div>
+			                            </div>
 
-                            <div className="flex gap-3">
-                                <div className="w-7 h-7 rounded-lg bg-red-500/15 text-red-300 flex items-center justify-center font-semibold shrink-0">2</div>
-                                <div>
-                                    <div className="text-white font-medium">复制或下载</div>
-                                    <div className="text-slate-400">
-                                        每张卡片提供 Markdown / URL / HTML 复制按钮，右上角可直接下载 SVG。
-                                    </div>
-                                </div>
-                            </div>
+			                            <div className="flex gap-3">
+		                                <div className="w-7 h-7 rounded-lg bg-red-500/15 text-red-300 flex items-center justify-center font-semibold shrink-0">2</div>
+		                                <div className="flex-1">
+			                                    <div className="text-white font-medium">{t('usage.step2Title')}</div>
+			                                    <div className="text-slate-400">{t('usage.step2Desc')}</div>
+			                                    <div className="mt-3 inline-flex max-w-full rounded-xl border border-slate-700/60 bg-slate-950/20 overflow-hidden">
+			                                        <video
+			                                            src="assets/mp4/github_christmas_kit_help_step2.mp4"
+			                                            className="h-32 md:h-40 w-auto max-w-full object-contain bg-slate-950/30"
+			                                            autoPlay
+			                                            loop
+			                                            muted
+			                                            playsInline
+			                                            preload="metadata"
+			                                        />
+			                                    </div>
+			                                </div>
+			                            </div>
 
-                            <div className="flex gap-3">
-                                <div className="w-7 h-7 rounded-lg bg-indigo-500/15 text-indigo-300 flex items-center justify-center font-semibold shrink-0">3</div>
-                                <div>
-                                    <div className="text-white font-medium">Contributor Lab（可选）</div>
-                                    <div className="text-slate-400">
-                                        粘贴你的 SVG / path 代码进行实时预览，并下载为文件。请保持 <code className="bg-slate-800/60 px-1.5 py-0.5 rounded">viewBox=&quot;0 0 64 64&quot;</code>。
-                                    </div>
-                                </div>
-                            </div>
+		                            <div className="text-xs text-slate-500">{t('usage.tip')}</div>
+		                        </div>
 
-                            <div className="text-xs text-slate-500">
-                                Tip: 若你直接用 <span className="text-slate-300 font-medium">file://</span> 打开页面，浏览器可能禁用剪贴板；建议使用本地服务或 HTTPS（如 GitHub Pages）。
-                            </div>
-                        </div>
+	                        <div className="mt-6 flex justify-end">
+	                            <button
+	                                type="button"
+	                                onClick={onClose}
+	                                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-medium shadow-lg shadow-green-500/20 transition-all active:scale-95"
+	                            >
+	                                {t('usage.gotIt')}
+	                            </button>
+	                        </div>
+	                    </div>
+	                </div>
+	            );
+	        };
 
-                        <div className="mt-6 flex justify-end">
-                            <button
-                                type="button"
-                                onClick={onClose}
-                                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-medium shadow-lg shadow-green-500/20 transition-all active:scale-95"
-                            >
-                                我知道了 / Got it
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
+			        // --- Component: IconCard ---
+			        const IconCard = ({ icon, baseUrl, repoHomeUrl, onCopy, onCopySuccess }) => {
+			            const { t, lang } = useContext(I18nContext);
 
-        // --- Component: IconCard ---
-        const IconCard = ({ icon, baseUrl, onCopy }) => {
-            const filePath = `assets/svg/${icon.name}.svg`;
-            const url = `${baseUrl.replace(/\/$/, '')}/${icon.name}.svg`;
+		            const filePath = `assets/svg/${icon.name}.svg`;
+		            const url = `${baseUrl.replace(/\/$/, '')}/${icon.name}.svg`;
+		            const displayName =
+		                getI18nValue(lang, `icons.${icon.id}`) ||
+		                getI18nValue('en', `icons.${icon.id}`) ||
+		                icon.name.replace(/-/g, ' ');
 
-            const labelByAction = {
-                MARKDOWN: 'Markdown',
-                URL: 'URL',
-                HTML: 'HTML',
-            };
+		            const actions = [
+		                { key: 'MARKDOWN', icon: 'ph ph-code-block', title: t('iconCard.copyMarkdown') },
+		                { key: 'URL', icon: 'ph ph-link-simple', title: t('iconCard.copyUrl') },
+		                { key: 'HTML', icon: 'ph ph-code', title: t('iconCard.copyHtml') },
+	                { key: 'DOWNLOAD', icon: 'ph ph-download-simple', title: t('iconCard.download') },
+	            ];
 
-            const actions = [
-                { key: 'MARKDOWN', icon: 'ph ph-code-block', title: 'Copy Markdown' },
-                { key: 'URL', icon: 'ph ph-link-simple', title: 'Copy URL' },
-                { key: 'HTML', icon: 'ph ph-code', title: 'Copy HTML' },
-                { key: 'DOWNLOAD', icon: 'ph ph-download-simple', title: 'Download SVG' },
-            ];
-
-            const handleAction = (action) => {
-                if (action === 'DOWNLOAD') {
-                    const link = document.createElement('a');
-                    link.href = filePath;
-                    link.download = `${icon.name}.svg`;
-                    link.click();
-                    onCopy('Downloaded SVG!', 'success');
-                    return;
-                }
+	            const handleAction = (action) => {
+	                if (action === 'DOWNLOAD') {
+	                    const link = document.createElement('a');
+	                    link.href = filePath;
+	                    link.download = `${icon.name}.svg`;
+	                    link.click();
+	                    onCopy(t('toast.downloaded'), 'success');
+	                    return;
+	                }
 
                 let content = '';
                 switch (action) {
                     case 'MARKDOWN':
-                        content = `![${icon.name}](${url})`;
+                        content = `[![${icon.name}](${url})](${repoHomeUrl})`;
                         break;
                     case 'URL':
                         content = url;
@@ -479,36 +1002,38 @@
                         return;
                 }
 
-                if (!navigator.clipboard?.writeText) {
-                    onCopy('Clipboard unavailable. Try HTTPS / local server.', 'error');
-                    return;
-                }
+	                if (!navigator.clipboard?.writeText) {
+	                    onCopy(t('toast.clipboardUnavailable'), 'error');
+	                    return;
+	                }
 
-                navigator.clipboard.writeText(content)
-                    .then(() => {
-                        onCopy(`Copied ${labelByAction[action]}!`, 'success');
-                    })
-                    .catch(() => {
-                        onCopy('Clipboard unavailable. Try HTTPS / local server.', 'error');
-                    });
-            };
+		                navigator.clipboard.writeText(content)
+		                    .then(() => {
+		                        const what = t(`formats.${action.toLowerCase()}`);
+		                        onCopy(t('toast.copied', { what }), 'success');
+		                        if (onCopySuccess) onCopySuccess();
+		                    })
+		                    .catch(() => {
+		                        onCopy(t('toast.clipboardUnavailable'), 'error');
+		                    });
+		            };
 
-            return (
-                <div className="group relative glass-panel rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(34,197,94,0.15)] flex flex-col items-center">
-                    {/* Glow Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-red-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
-                    {/* Icon Preview */}
-                    <div className="relative w-24 h-24 mb-4 flex items-center justify-center drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] transition-transform duration-300 group-hover:scale-110">
-                        <img src={filePath} alt={icon.name} className="w-16 h-16 block" loading="lazy" />
-                    </div>
-                    
-                    <h3 className="relative text-white font-medium mb-4 capitalize">{icon.name.replace(/-/g, ' ')}</h3>
-                    
-                    {/* Actions Grid */}
-                    <div className="relative w-full grid grid-cols-4 gap-2">
-                        {actions.map((item) => (
-                            <button
+	            return (
+	                <div className="group relative glass-panel rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(34,197,94,0.15)] flex flex-col items-center">
+	                    {/* Glow Effect */}
+	                    <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-red-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+	                    
+	                    {/* Icon Preview */}
+	                    <div className="relative w-24 h-24 mb-4 flex items-center justify-center drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] transition-transform duration-300 group-hover:scale-110">
+	                        <img src={filePath} alt={displayName} className="w-16 h-16 block" loading="lazy" />
+	                    </div>
+	                    
+	                    <h3 className="relative text-white font-medium mb-4">{displayName}</h3>
+	                    
+	                    {/* Actions Grid */}
+	                    <div className="relative w-full grid grid-cols-4 gap-2">
+	                        {actions.map((item) => (
+	                            <button
                                 key={item.key}
                                 type="button"
                                 onClick={() => handleAction(item.key)}
@@ -524,100 +1049,167 @@
             );
         };
 
-        // --- Component: LabSection ---
-        const LabSection = ({ onCopy }) => {
-            const [customCode, setCustomCode] = useState('<circle cx="32" cy="32" r="20" fill="#ef4444" />');
-            const aiPrompt = "Create a minimal, cute Christmas-themed SVG icon (64x64 viewbox). Use bold colors and simple shapes suitable for a dark background. Return only the SVG code without markdown wrapping.";
+	        // --- Component: LabSection ---
+		        const LabSection = ({ onCopy }) => {
+		            const { t } = useContext(I18nContext);
 
-            const copyPrompt = () => {
-                if (!navigator.clipboard?.writeText) {
-                    onCopy('Clipboard unavailable. Try HTTPS / local server.', 'error');
-                    return;
-                }
+				            const [customCode, setCustomCode] = useState(() => `<!-- Demo: assets/svg/santa-hat.svg (shows source here) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Santa hat">
+  <defs>
+    <linearGradient id="hatRed" x1="0" y1="14" x2="0" y2="52">
+      <stop offset="0" stop-color="#fb7185"/>
+      <stop offset="1" stop-color="#ef4444"/>
+    </linearGradient>
+  </defs>
 
-                navigator.clipboard.writeText(aiPrompt)
-                    .then(() => onCopy('AI Prompt copied! Paste into ChatGPT/Claude.', 'success'))
-                    .catch(() => onCopy('Clipboard unavailable. Try HTTPS / local server.', 'error'));
-            };
+  <!-- Float + tilt (looping) -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0 0; 0 -2; 0 0" dur="1.6s" repeatCount="indefinite" />
+    <g transform-origin="32 44">
+      <animateTransform attributeName="transform" type="rotate" values="-3 32 44; 3 32 44; -3 32 44" dur="1.6s" repeatCount="indefinite" />
+
+      <!-- Cap -->
+      <path
+        d="M14 44C16 26 30 14 44 18C54 21 56 35 48 41C41 45 34 40 26 46C21 50 16 48 14 44Z"
+        fill="url(#hatRed)"
+        stroke="#fff"
+        stroke-width="1.6"
+        stroke-linejoin="round"
+      />
+
+      <!-- Brim -->
+      <rect x="12" y="42" width="40" height="10" rx="5" fill="#fff" opacity="0.95" />
+      <path d="M14 47H50" stroke="#e2e8f0" stroke-width="1.4" stroke-linecap="round" opacity="0.6" />
+
+      <!-- Pom-pom (bounce) -->
+      <circle cx="50" cy="34" r="6" fill="#fff" opacity="0.96">
+        <animate attributeName="r" values="6;6.6;6" dur="1.6s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="48" cy="32" r="2" fill="#e2e8f0" opacity="0.6">
+        <animate attributeName="r" values="2;2.3;2" dur="1.6s" repeatCount="indefinite" />
+      </circle>
+    </g>
+  </g>
+</svg>`);
+		            const aiPrompt = t('lab.aiPrompt');
+
+	            const copyPrompt = () => {
+	                if (!navigator.clipboard?.writeText) {
+	                    onCopy(t('toast.clipboardUnavailable'), 'error');
+	                    return;
+	                }
+
+	                navigator.clipboard.writeText(aiPrompt)
+	                    .then(() => onCopy(t('toast.promptCopied'), 'success'))
+	                    .catch(() => onCopy(t('toast.clipboardUnavailable'), 'error'));
+	            };
 
             const downloadCustom = () => {
                 const fullSvg = customCode.includes('<svg') ? customCode : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">${customCode}</svg>`;
                 const blob = new Blob([fullSvg], { type: 'image/svg+xml' });
                 const url = URL.createObjectURL(blob);
                 const link = document.createElement('a');
-                link.href = url;
-                link.download = `custom-christmas-icon.svg`;
-                link.click();
-                onCopy('Custom icon downloaded!', 'success');
-            };
+	                link.href = url;
+	                link.download = `custom-christmas-icon.svg`;
+	                link.click();
+	                onCopy(t('toast.customDownloaded'), 'success');
+	            };
 
-            return (
-                <div className="glass-panel rounded-3xl p-8 mt-16 border border-indigo-500/30 shadow-[0_0_50px_rgba(79,70,229,0.1)]">
-                    <div className="flex flex-col md:flex-row items-start justify-between mb-8 gap-4">
-                        <div>
-                            <div className="flex items-center gap-2 mb-2">
-                                <span className="bg-indigo-500 text-white text-xs px-2 py-0.5 rounded-full">Beta</span>
-                                <h2 className="text-2xl font-bold text-white">Contributor Lab</h2>
-                            </div>
-                            <p className="text-slate-400">Design your own icon or use AI to generate one, then test it here.</p>
-                        </div>
-                        <button 
-                            onClick={copyPrompt}
-                            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-xl shadow-lg shadow-indigo-500/20 transition-all active:scale-95"
-                        >
-                            <i className="ph ph-magic-wand text-lg"></i>
-                            <span>Copy AI Prompt</span>
-                        </button>
-                    </div>
+	            return (
+	                <div className="glass-panel rounded-3xl p-8 mt-16 border border-indigo-500/30 shadow-[0_0_50px_rgba(79,70,229,0.1)]">
+	                    <div className="flex flex-col md:flex-row items-start justify-between mb-8 gap-4">
+	                        <div>
+	                            <div className="flex items-center gap-2 mb-2">
+	                                <span className="bg-indigo-500 text-white text-xs px-2 py-0.5 rounded-full">{t('lab.beta')}</span>
+	                                <h2 className="text-2xl font-bold text-white">{t('lab.title')}</h2>
+	                            </div>
+	                            <p className="text-slate-400">{t('lab.desc')}</p>
+	                        </div>
+	                        <button 
+	                            onClick={copyPrompt}
+	                            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-xl shadow-lg shadow-indigo-500/20 transition-all active:scale-95"
+	                        >
+	                            <i className="ph ph-magic-wand text-lg"></i>
+	                            <span>{t('lab.copyPrompt')}</span>
+	                        </button>
+	                    </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        {/* Input Area */}
-                        <div className="space-y-4">
-                            <label className="block text-sm font-medium text-slate-300">SVG Path / Code</label>
-                            <textarea
-                                value={customCode}
-                                onChange={(e) => setCustomCode(e.target.value)}
-                                className="w-full h-48 glass-input rounded-xl p-4 font-mono text-sm text-green-300 resize-none focus:ring-2 focus:ring-indigo-500/50"
-                                placeholder="Paste your <path> or full <svg> here..."
-                            />
-                            <p className="text-xs text-slate-500">Tip: Ensure viewBox is 0 0 64 64 for best results.</p>
-                        </div>
+	                        {/* Input Area */}
+	                        <div className="space-y-4">
+	                            <label className="block text-sm font-medium text-slate-300">{t('lab.inputLabel')}</label>
+	                            <textarea
+	                                value={customCode}
+	                                onChange={(e) => setCustomCode(e.target.value)}
+	                                className="w-full h-48 glass-input rounded-xl p-4 font-mono text-sm text-green-300 resize-none focus:ring-2 focus:ring-indigo-500/50"
+	                                placeholder={t('lab.inputPlaceholder')}
+	                            />
+	                            <p className="text-xs text-slate-500">{t('lab.tip')}</p>
+	                        </div>
 
-                        {/* Preview Area */}
-                        <div className="flex flex-col items-center justify-center bg-slate-800/50 rounded-xl border border-slate-700 border-dashed p-8 relative">
-                             <div className="mb-4 text-sm text-slate-400">Live Preview</div>
-                             <div 
-                                className="w-32 h-32 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-                                dangerouslySetInnerHTML={{ 
-                                    __html: customCode.includes('<svg') ? customCode : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="128" height="128">${customCode}</svg>`
-                                }} 
-                             />
-                             <button 
-                                onClick={downloadCustom}
-                                className="mt-8 px-6 py-2 bg-slate-700 hover:bg-white hover:text-slate-900 text-white rounded-full transition-all flex items-center gap-2"
-                             >
-                                <i className="ph ph-download-simple"></i>
-                                Download
-                             </button>
-                        </div>
-                    </div>
-                </div>
+	                        {/* Preview Area */}
+	                        <div className="flex flex-col items-center justify-center bg-slate-800/50 rounded-xl border border-slate-700 border-dashed p-8 relative">
+		                             <div className="mb-4 text-sm text-slate-400">{t('lab.preview')}</div>
+		                             <div 
+		                                className="w-full max-w-md flex items-center justify-center drop-shadow-[0_0_20px_rgba(255,255,255,0.1)] [&_svg]:w-56 [&_svg]:h-56 md:[&_svg]:w-72 md:[&_svg]:h-72"
+		                                dangerouslySetInnerHTML={{ 
+	                                    __html: customCode.includes('<svg') ? customCode : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="128" height="128">${customCode}</svg>`
+	                                }} 
+		                             />
+	                             <button 
+	                                onClick={downloadCustom}
+	                                className="mt-8 px-6 py-2 bg-slate-700 hover:bg-white hover:text-slate-900 text-white rounded-full transition-all flex items-center gap-2"
+	                             >
+	                                <i className="ph ph-download-simple"></i>
+	                                {t('lab.download')}
+	                             </button>
+	                        </div>
+	                    </div>
+	                </div>
             );
         };
 
         // --- Component: ContributingGuide ---
         const ContributingGuide = ({ onBack, onCopy }) => {
-            const promptTemplate = 'Create a simple, flat, vector SVG icon of a [ITEM NAME], square aspect ratio, viewBox="0 0 64 64". Use bold colors like #ef4444 (red), #22c55e (green), #fff. Minimal details, optimized for small size. No background.';
+            const { t, lang } = useContext(I18nContext);
+            const promptTemplate =
+                lang === 'zh'
+                    ? `请生成一个“圣诞帽（Santa Hat）”的 SVG 小图标，viewBox="0 0 64 64"，透明背景，适合暗色背景展示。风格要简洁可爱、线条清晰、形状大胆。
+
+配色与结构：
+- 帽身为红色，并带轻微的竖向渐变：顶部 #fb7185 → 底部 #ef4444（linearGradient id="hatRed"）
+- 帽檐为柔和的白色（圆角矩形/路径），可加一条浅灰高光线
+- 帽尖有一个白色绒球（circle）
+
+动画（循环播放 repeatCount="indefinite"）：
+- 整体上下漂浮：animateTransform translate 值 "0 0; 0 -2; 0 0"，dur="1.6s"
+- 轻微左右摇摆：animateTransform rotate 围绕 (32,44) 值 "-3 32 44; 3 32 44; -3 32 44"，dur="1.6s"
+- 绒球轻微弹跳：circle 的 r 值 "6; 6.6; 6"，dur="1.6s"
+
+请只返回 SVG 代码（不要 markdown 包裹），不要引用外部资源，保持代码简洁。想生成其他同风格图标，把“圣诞帽”替换为其他圣诞元素即可。`
+                    : `Create an animated SVG icon of a Santa Hat with viewBox="0 0 64 64" (transparent background). Style: bold, cute, and readable on a dark background.
+
+Colors & structure:
+- Red cap with a subtle vertical gradient (top #fb7185 → bottom #ef4444), use a linearGradient id="hatRed"
+- Soft white brim (rounded rect/path), optional light gray highlight line
+- White pom-pom (circle) on the tip
+
+Looping animations (repeatCount="indefinite"):
+- Float the whole hat up/down with animateTransform translate: "0 0; 0 -2; 0 0" dur="1.6s"
+- Slight tilt with animateTransform rotate around (32,44): "-3 32 44; 3 32 44; -3 32 44" dur="1.6s"
+- Pom-pom bounce by animating its radius: "6; 6.6; 6" dur="1.6s"
+
+Return only the SVG code (no markdown). Keep it self-contained (no external assets). To create other icons in the same style, replace “Santa Hat” with another Christmas item.`;
 
             const handleCopy = () => {
                 if (!navigator.clipboard?.writeText) {
-                    onCopy('Clipboard unavailable. Try HTTPS / local server.', 'error');
+                    onCopy(t('toast.clipboardUnavailable'), 'error');
                     return;
                 }
 
                 navigator.clipboard.writeText(promptTemplate)
-                    .then(() => onCopy('Prompt Template copied!', 'success'))
-                    .catch(() => onCopy('Clipboard unavailable. Try HTTPS / local server.', 'error'));
+                    .then(() => onCopy(t('toast.templateCopied'), 'success'))
+                    .catch(() => onCopy(t('toast.clipboardUnavailable'), 'error'));
             };
 
             return (
@@ -627,272 +1219,497 @@
                         className="mb-8 flex items-center gap-2 text-slate-400 hover:text-white transition-colors group"
                     >
                         <i className="ph ph-arrow-left group-hover:-translate-x-1 transition-transform"></i> 
-                        Back to Kit
+                        {t('guide.back')}
                     </button>
 
                     <div className="glass-panel p-8 md:p-12 rounded-3xl relative overflow-hidden">
                         {/* Decorative background glow */}
                         <div className="absolute top-0 right-0 w-64 h-64 bg-green-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
-                        <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">🎄 如何贡献 (Contributing Guide)</h1>
-                        
-                        <p className="text-slate-300 text-lg mb-8 leading-relaxed">
-                            非常感谢你有兴趣为 Christmas Icons Kit 做出贡献！这个项目由社区驱动，我们非常欢迎你提交新的图标。
-                            我们鼓励使用 AI 工具（如 ChatGPT, Gemini, Midjourney 等）来辅助创作，然后提交 Pull Request。
-                        </p>
+                        <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">{t('guide.title')}</h1>
 
-                        <div className="space-y-12">
-                            {/* Section 1 */}
-                            <section>
-                                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                                    <span className="bg-indigo-500/20 text-indigo-400 p-2 rounded-lg text-xl">🚀</span>
-                                    快速上手：AI 辅助贡献流程
-                                </h2>
-                                <p className="text-slate-400 mb-6">即使你不会画画，也可以通过以下步骤在 5 分钟内贡献一个图标！</p>
-                                
-                                <div className="pl-4 border-l-2 border-slate-700 space-y-8">
-                                    
-                                    {/* Step 1 */}
-                                    <div>
-                                        <h3 className="text-xl font-semibold text-white mb-3">第一步：生成 SVG</h3>
-                                        <p className="text-slate-400 mb-4">使用我们提供的标准提示词，发给你的 AI 助手（推荐使用 Gemini 或 ChatGPT）。</p>
-                                        <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700/50 relative group">
-                                            <div className="flex justify-between items-center mb-2">
-                                                <p className="text-xs text-slate-500 font-mono uppercase tracking-wider">Prompt Template</p>
-                                                <button 
-                                                    onClick={handleCopy}
-                                                    className="text-xs flex items-center gap-1 text-slate-400 hover:text-white transition-colors"
-                                                >
-                                                    <i className="ph ph-copy"></i> Copy
-                                                </button>
-                                            </div>
-                                            <code className="block font-mono text-sm text-green-300 mb-4 break-words whitespace-pre-wrap">{promptTemplate}</code>
-                                            <p className="text-xs text-slate-500">(把 [ITEM NAME] 替换成你想要的东西，比如 "Reindeer", "Sleigh", "Bell", "Star" 等)</p>
-                                        </div>
-                                    </div>
+                        {lang === 'zh' ? (
+                            <>
+                                <p className="text-slate-300 text-lg mb-8 leading-relaxed">
+                                    非常感谢你有兴趣为 Christmas Icons Kit 做出贡献！这个项目由社区驱动，我们非常欢迎你提交新的图标。
+                                    我们鼓励使用 AI 工具（如 ChatGPT, Gemini, Midjourney 等）来辅助创作，然后提交 Pull Request。
+                                </p>
 
-                                    {/* Step 2 */}
-                                    <div>
-                                        <h3 className="text-xl font-semibold text-white mb-3">第二步：测试与预览</h3>
-                                        <ul className="list-disc list-inside text-slate-400 space-y-2">
-                                            <li>打开我们的项目主页（你本地运行的 index.html 或者在线 Demo）。</li>
-                                            <li>滚动到底部的 <span className="text-white font-medium">“🧪 贡献者实验室”</span>。</li>
-                                            <li>把 AI 生成的代码粘贴进去。</li>
-                                            <li>观察预览效果：
-                                                <ul className="pl-6 pt-1 space-y-1 list-[circle]">
-                                                    <li>图标是否清晰？</li>
-                                                    <li>是否有背景色？（应该是透明的）</li>
-                                                    <li>颜色是否符合节日气氛？</li>
+                                <div className="space-y-12">
+                                    {/* Section 1 */}
+                                    <section>
+                                        <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                                            <span className="bg-indigo-500/20 text-indigo-400 p-2 rounded-lg text-xl">🚀</span>
+                                            快速上手：AI 辅助贡献流程
+                                        </h2>
+                                        <p className="text-slate-400 mb-6">即使你不会画画，也可以通过以下步骤在 5 分钟内贡献一个图标！</p>
+
+                                        <div className="pl-4 border-l-2 border-slate-700 space-y-8">
+                                            {/* Step 1 */}
+                                            <div>
+                                                <h3 className="text-xl font-semibold text-white mb-3">第一步：生成 SVG</h3>
+                                                <p className="text-slate-400 mb-4">使用我们提供的标准提示词，发给你的 AI 助手（推荐使用 Gemini 或 ChatGPT）。</p>
+                                                <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700/50 relative group">
+                                                    <div className="flex justify-between items-center mb-2">
+                                                        <p className="text-xs text-slate-500 font-mono uppercase tracking-wider">{t('guide.promptLabel')}</p>
+                                                        <button 
+                                                            onClick={handleCopy}
+                                                            className="text-xs flex items-center gap-1 text-slate-400 hover:text-white transition-colors"
+                                                        >
+                                                            <i className="ph ph-copy"></i> {t('guide.copy')}
+                                                        </button>
+                                                    </div>
+                                                    <code className="block font-mono text-sm text-green-300 mb-4 break-words whitespace-pre-wrap">{promptTemplate}</code>
+	                                                    <p className="text-xs text-slate-500">（这是“圣诞帽”的示例提示词：你也可以把“圣诞帽”替换成其他圣诞元素，保持同风格输出。）</p>
+	                                                </div>
+	                                            </div>
+
+                                            {/* Step 2 */}
+                                            <div>
+                                                <h3 className="text-xl font-semibold text-white mb-3">第二步：测试与预览</h3>
+                                                <ul className="list-disc list-inside text-slate-400 space-y-2">
+                                                    <li>打开我们的项目主页（你本地运行的 index.html 或者在线 Demo）。</li>
+                                                    <li>滚动到底部的 <span className="text-white font-medium">“🧪 贡献者实验室”</span>。</li>
+                                                    <li>把 AI 生成的代码粘贴进去。</li>
+                                                    <li>观察预览效果：
+                                                        <ul className="pl-6 pt-1 space-y-1 list-[circle]">
+                                                            <li>图标是否清晰？</li>
+                                                            <li>是否有背景色？（应该是透明的）</li>
+                                                            <li>颜色是否符合节日气氛？</li>
+                                                        </ul>
+                                                    </li>
                                                 </ul>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                            </div>
 
-                                     {/* Step 3 */}
-                                     <div>
-                                        <h3 className="text-xl font-semibold text-white mb-3">第三步：提交 PR</h3>
-                                        <ul className="list-disc list-inside text-slate-400 space-y-2">
-                                            <li>在实验室中点击 “下载 .svg”，并给文件起个好名字（英文，例如 santa-hat.svg）。</li>
-                                            <li>Fork 本仓库。</li>
-	                                            <li>将下载的 SVG 文件放入 <code className="bg-slate-800 px-1 rounded text-sm text-indigo-300">assets/svg/</code> 文件夹。</li>
-                                            <li>（可选）在 index.html 的 icons 数组中添加你的图标信息（如果不熟悉代码，只需提交 SVG 文件，维护者会帮你添加）。</li>
-                                            <li>提交 Pull Request！</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </section>
-
-                            {/* Section 2 */}
-                            <section>
-                                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                                    <span className="bg-red-500/20 text-red-400 p-2 rounded-lg text-xl">📐</span>
-                                    图标规范
-                                </h2>
-                                <p className="text-slate-400 mb-6">为了保持风格统一，请遵循以下规范：</p>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {[
-                                        { label: '格式', value: '标准 SVG' },
-                                        { label: '尺寸', value: 'ViewBox 必须是 0 0 64 64' },
-                                        { label: '风格', value: '扁平化 (Flat)，像素风 (Pixel)，或极简线条 (Minimal Line)' },
-                                        { label: '背景', value: '必须是透明背景' },
-                                        { label: '颜色', value: '推荐使用 Tailwind CSS 标准色盘中的红色 (#ef4444, #dc2626)、绿色 (#22c55e, #15803d) 和白色。' },
-                                    ].map((item, idx) => (
-                                        <div key={idx} className="bg-slate-800/30 p-4 rounded-xl border border-slate-700/30">
-                                            <span className="block text-slate-500 text-xs mb-1 uppercase tracking-wider">{item.label}</span>
-                                            <span className="text-white font-medium text-sm">{item.value}</span>
+                                            {/* Step 3 */}
+                                            <div>
+                                                <h3 className="text-xl font-semibold text-white mb-3">第三步：提交 PR</h3>
+                                                <ul className="list-disc list-inside text-slate-400 space-y-2">
+                                                    <li>在实验室中点击 “下载 .svg”，并给文件起个好名字（英文，例如 santa-hat.svg）。</li>
+                                                    <li>Fork 本仓库。</li>
+                                                    <li>将下载的 SVG 文件放入 <code className="bg-slate-800 px-1 rounded text-sm text-indigo-300">assets/svg/</code> 文件夹。</li>
+                                                    <li>（可选）在 index.html 的 icons 数组中添加你的图标信息（如果不熟悉代码，只需提交 SVG 文件，维护者会帮你添加）。</li>
+                                                    <li>提交 Pull Request！</li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    ))}
+                                    </section>
+
+                                    {/* Section 2 */}
+                                    <section>
+                                        <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                                            <span className="bg-red-500/20 text-red-400 p-2 rounded-lg text-xl">📐</span>
+                                            图标规范
+                                        </h2>
+                                        <p className="text-slate-400 mb-6">为了保持风格统一，请遵循以下规范：</p>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            {[
+                                                { label: '格式', value: '标准 SVG' },
+                                                { label: '尺寸', value: 'ViewBox 必须是 0 0 64 64' },
+                                                { label: '风格', value: '扁平化 (Flat)，像素风 (Pixel)，或极简线条 (Minimal Line)' },
+                                                { label: '背景', value: '必须是透明背景' },
+                                                { label: '颜色', value: '推荐使用 Tailwind CSS 标准色盘中的红色 (#ef4444, #dc2626)、绿色 (#22c55e, #15803d) 和白色。' },
+                                            ].map((item, idx) => (
+                                                <div key={idx} className="bg-slate-800/30 p-4 rounded-xl border border-slate-700/30">
+                                                    <span className="block text-slate-500 text-xs mb-1 uppercase tracking-wider">{item.label}</span>
+                                                    <span className="text-white font-medium text-sm">{item.value}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </section>
                                 </div>
-                            </section>
-                        </div>
+                            </>
+                        ) : (
+                            <>
+                                <p className="text-slate-300 text-lg mb-8 leading-relaxed">
+                                    Thanks for contributing! Add new Christmas icons by submitting a Pull Request.
+                                </p>
+
+                                <div className="space-y-12">
+                                    <section>
+                                        <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                                            <span className="bg-indigo-500/20 text-indigo-400 p-2 rounded-lg text-xl">🚀</span>
+                                            Quick start
+                                        </h2>
+
+                                        <div className="pl-4 border-l-2 border-slate-700 space-y-6">
+                                            <div>
+                                                <div className="text-white font-semibold mb-2">1) Generate an SVG</div>
+                                                <p className="text-slate-400">
+                                                    Use this prompt with your AI tool (or draw it yourself). Keep it minimal and readable at small sizes.
+                                                </p>
+                                            </div>
+
+                                            <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700/50 relative group">
+                                                <div className="flex justify-between items-center mb-2">
+                                                    <p className="text-xs text-slate-500 font-mono uppercase tracking-wider">{t('guide.promptLabel')}</p>
+                                                    <button 
+                                                        onClick={handleCopy}
+                                                        className="text-xs flex items-center gap-1 text-slate-400 hover:text-white transition-colors"
+                                                    >
+                                                        <i className="ph ph-copy"></i> {t('guide.copy')}
+                                                    </button>
+                                                </div>
+                                                <code className="block font-mono text-sm text-green-300 break-words whitespace-pre-wrap">{promptTemplate}</code>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-white font-semibold mb-2">2) Add the file</div>
+                                                <p className="text-slate-400">
+                                                    Put your SVG into <code className="bg-slate-800/60 px-1.5 py-0.5 rounded">assets/svg/</code> (kebab-case name).
+                                                </p>
+                                            </div>
+
+                                            <div>
+                                                <div className="text-white font-semibold mb-2">3) Open a PR</div>
+                                                <p className="text-slate-400">
+                                                    Optionally add the icon entry to the <code className="bg-slate-800/60 px-1.5 py-0.5 rounded">CHRISTMAS_ICONS</code> array in <code className="bg-slate-800/60 px-1.5 py-0.5 rounded">index.html</code>.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <section>
+                                        <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                                            <span className="bg-red-500/20 text-red-400 p-2 rounded-lg text-xl">📐</span>
+                                            Icon guidelines
+                                        </h2>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            {[
+                                                { label: 'Format', value: 'SVG' },
+                                                { label: 'Size', value: 'viewBox must be 0 0 64 64' },
+                                                { label: 'Style', value: 'Flat / Pixel / Minimal line' },
+                                                { label: 'Background', value: 'Transparent' },
+                                                { label: 'Colors', value: 'Prefer red (#ef4444), green (#22c55e), white' },
+                                            ].map((item, idx) => (
+                                                <div key={idx} className="bg-slate-800/30 p-4 rounded-xl border border-slate-700/30">
+                                                    <span className="block text-slate-500 text-xs mb-1 uppercase tracking-wider">{item.label}</span>
+                                                    <span className="text-white font-medium text-sm">{item.value}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </section>
+                                </div>
+                            </>
+                        )}
 
                         <div className="mt-12 pt-8 border-t border-slate-700 text-center">
-                            <p className="text-slate-400">再次感谢你的贡献！祝你节日快乐！🎅</p>
+                            <p className="text-slate-400">{lang === 'zh' ? '再次感谢你的贡献！祝你节日快乐！🎅' : 'Thanks again — happy holidays! 🎅'}</p>
                         </div>
                     </div>
                 </div>
             );
-        };
-
-        // --- Main App Component ---
-        const App = () => {
-            const ICONS_REPO_URL = 'https://github.com/kangchainx/christmas-readme-assets/tree/main/assets/svg';
-
-            const [view, setView] = useState('home'); // 'home' | 'guide'
-            const [baseUrl, setBaseUrl] = useState('https://kangchainx.github.io/christmas-readme-assets/assets/svg/');
-            const [isUsageOpen, setIsUsageOpen] = useState(true);
-            const [toast, setToast] = useState({ show: false, msg: '', type: 'success' });
-
-            const showToast = (msg, type = 'success') => {
-                setToast({ show: true, msg, type });
-                setTimeout(() => setToast(prev => ({ ...prev, show: false })), 3000);
-            };
-
-            const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            const handleNavigate = (newView) => {
-                setView(newView);
-                scrollToTop();
-            }
-
-            return (
-                <div className="relative min-h-screen">
-                    <SnowEffect />
-                    
-                    {/* Background Gradient Mesh */}
-                    <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(30,58,138,0.15),transparent_70%)] pointer-events-none" />
-                    
-                    {/* Main Content */}
-                    <div className="relative z-10 max-w-6xl mx-auto px-4 pt-12 md:pt-20">
-                        
-	                        {view === 'home' ? (
-	                            <>
-	                                {/* Header */}
-	                                <div className="text-center mb-16 animate-slideIn">
-                                    <div className="inline-block text-6xl mb-4 animate-float cursor-default select-none filter drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
-                                        🎄
-                                    </div>
-                                    <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-xl tracking-tight">
-                                        GitHub <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600">Christmas</span> Kit
-                                    </h1>
-	                                    <p className="text-lg text-slate-300 max-w-2xl mx-auto mb-8 leading-relaxed">
-	                                        Christmas-only SVG icons for decorating your GitHub Profile README.
-	                                        This kit does <span className="text-white/90 font-medium">not</span> generate full profile designs or README layouts.
-	                                    </p>
-	                                    
-	                                    <div className="flex justify-center gap-3">
-	                                        {['Open Source', 'Vector SVG', 'Dark Mode'].map((tag) => (
-	                                            <span key={tag} className="px-3 py-1 rounded-full glass-panel text-xs text-slate-300 border border-slate-700/50">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-
-	                                {/* Configuration Bar */}
-	                                <div className="glass-panel p-3 rounded-2xl max-w-3xl mx-auto mb-16 shadow-lg animate-slideIn">
-	                                    <div className="flex flex-col md:flex-row md:items-center gap-2">
-	                                        <div className="px-3 py-2 text-slate-400 text-sm font-medium whitespace-nowrap flex items-center gap-2">
-	                                            <i className="ph ph-link"></i>
-	                                            Icon Repository Base URL
-	                                        </div>
-	                                        <div className="flex-1 flex items-center gap-2 w-full">
-	                                            <input 
-	                                                type="text" 
-	                                                value={baseUrl}
-	                                                onChange={(e) => setBaseUrl(e.target.value)}
-	                                                className="flex-1 bg-transparent border-none text-white focus:ring-0 placeholder-slate-600 text-sm w-full"
-	                                                placeholder="https://.../assets/svg/"
-	                                            />
-	                                            <button
-	                                                type="button"
-	                                                onClick={() => window.open(baseUrl, '_blank', 'noopener,noreferrer')}
-	                                                className="app-tooltip p-2 text-slate-300 bg-slate-800/50 hover:bg-slate-700/80 rounded-lg border border-slate-700 hover:border-slate-500 transition-colors"
-	                                                aria-label="Open Base URL"
-	                                                data-tooltip="Open Base URL"
-	                                            >
-	                                                <i className="ph ph-arrow-square-out text-lg"></i>
-	                                            </button>
-	                                            <button
-	                                                type="button"
-	                                                onClick={() => window.open(ICONS_REPO_URL, '_blank', 'noopener,noreferrer')}
-	                                                className="app-tooltip p-2 text-slate-300 bg-slate-800/50 hover:bg-slate-700/80 rounded-lg border border-slate-700 hover:border-slate-500 transition-colors"
-	                                                aria-label="Open Icons Repo"
-	                                                data-tooltip="Open Icons Repo"
-	                                            >
-	                                                <i className="ph ph-github-logo text-lg"></i>
-	                                            </button>
-	                                            <button
-	                                                type="button"
-	                                                onClick={() => setIsUsageOpen(true)}
-	                                                className="app-tooltip p-2 text-slate-300 bg-slate-800/50 hover:bg-slate-700/80 rounded-lg border border-slate-700 hover:border-slate-500 transition-colors"
-	                                                aria-label="How to use"
-	                                                data-tooltip="How to use"
-	                                            >
-	                                                <i className="ph ph-info text-lg"></i>
-	                                            </button>
-	                                        </div>
-	                                    </div>
-	                                    <div className="px-3 pt-2 text-xs text-slate-500">
-	                                        Used for Markdown/URL/HTML copies. Source icons live in <span className="text-slate-300 font-medium">assets/svg/</span>.
-	                                    </div>
-	                                </div>
-
-                                {/* Icon Grid */}
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-16 animate-slideIn">
-                                    {CHRISTMAS_ICONS.map((icon) => (
-                                        <IconCard 
-                                            key={icon.id} 
-                                            icon={icon} 
-                                            baseUrl={baseUrl} 
-                                            onCopy={showToast} 
-                                        />
-                                    ))}
-                                </div>
-
-                                {/* Contributor Lab */}
-                                <div className="animate-slideIn">
-                                    <LabSection onCopy={showToast} />
-                                </div>
-
-                                {/* Footer */}
-                                <footer className="mt-20 pb-12 text-center text-slate-500 text-sm animate-slideIn">
-                                    <p className="mb-4">Built with React, Tailwind &amp; Holiday Spirit 🎅</p>
-                                    
-                                    <div className="flex justify-center gap-6 mb-6">
-                                        <button 
-                                            onClick={() => handleNavigate('guide')}
-                                            className="text-indigo-400 hover:text-indigo-300 underline underline-offset-4 transition-colors"
-                                        >
-                                            Contributing Guide (如何贡献)
-                                        </button>
-                                    </div>
-
-                                    <div className="flex justify-center gap-4 text-xl">
-                                        <a href="https://github.com/kangchainx/christmas-readme-assets" target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="GitHub Repository">
-                                            <i className="ph ph-github-logo"></i>
-                                        </a>
-                                        <a href="https://kangchainx.github.io/christmas-readme-assets/" target="_blank" rel="noreferrer" className="hover:text-sky-400 transition-colors" aria-label="Live Demo">
-                                            <i className="ph ph-globe"></i>
-                                        </a>
-                                    </div>
-                                </footer>
-                            </>
-                        ) : (
-                            <ContributingGuide onBack={() => handleNavigate('home')} onCopy={showToast} />
-                        )}
-                    </div>
-
-	                    <UsageModal
-	                        isOpen={isUsageOpen}
-	                        onClose={() => setIsUsageOpen(false)}
-	                        baseUrl={baseUrl}
-	                        repoUrl={ICONS_REPO_URL}
-	                    />
-	                    <Toast isVisible={toast.show} message={toast.msg} type={toast.type} />
-	                </div>
-	            );
 	        };
+
+		        // --- Component: StarPromptBanner ---
+		        // Lightweight, non-intrusive "please star" banner shown after first successful icon copy.
+		        const StarPromptBanner = ({ isVisible, repoUrl, onClose }) => {
+		            const { t } = useContext(I18nContext);
+		            if (!isVisible) return null;
+
+		            return (
+		                <div className="mb-6 animate-slideIn">
+		                    <div className="glass-panel rounded-2xl px-4 py-3 border border-slate-700/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+		                        <div className="flex items-center gap-3">
+		                            <div className="w-9 h-9 rounded-xl bg-yellow-500/15 text-yellow-200 flex items-center justify-center shrink-0 border border-yellow-400/20">
+		                                <i className="ph ph-star-four text-xl"></i>
+		                            </div>
+		                            <div className="text-slate-200 text-sm leading-relaxed">
+		                                {t('starPrompt.message')}
+		                            </div>
+		                        </div>
+
+		                        <div className="flex items-center gap-2">
+		                            <a
+		                                href={repoUrl}
+		                                target="_blank"
+		                                rel="noopener noreferrer"
+		                                onClick={onClose}
+		                                className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-800/40 hover:bg-slate-700/60 border border-yellow-400/25 text-yellow-100 text-sm font-semibold transition-colors"
+		                            >
+		                                <i className="ph ph-star text-lg"></i>
+		                                {t('starPrompt.cta')}
+		                            </a>
+		                            <button
+		                                type="button"
+		                                onClick={onClose}
+		                                className="app-tooltip w-10 h-10 inline-flex items-center justify-center rounded-xl bg-slate-800/30 hover:bg-slate-700/50 border border-slate-700/60 text-slate-200 transition-colors"
+		                                aria-label={t('tooltip.close')}
+		                                data-tooltip={t('tooltip.close')}
+		                            >
+		                                <i className="ph ph-x text-lg"></i>
+		                            </button>
+		                        </div>
+		                    </div>
+		                </div>
+		            );
+		        };
+
+			        // --- Main App Component ---
+			        const App = () => {
+			            const REPO_URL = 'https://github.com/kangchainx/christmas-readme-assets';
+			            const REPO_HOME_URL = 'https://kangchainx.github.io/christmas-readme-assets';
+		            const ICONS_REPO_URL = 'https://github.com/kangchainx/christmas-readme-assets/tree/main/assets/svg';
+		            const ICONS_BASE_URL = 'https://kangchainx.github.io/christmas-readme-assets/assets/svg/';
+
+		            const [lang, setLang] = useState(() => {
+		                try {
+		                    const stored = localStorage.getItem('gck_lang');
+		                    if (stored === 'en' || stored === 'zh') return stored;
+		                } catch {}
+
+		                const preferred = (navigator.languages?.[0] || navigator.language || 'en').toLowerCase();
+		                return preferred.startsWith('zh') ? 'zh' : 'en';
+		            });
+
+		            useEffect(() => {
+		                try {
+		                    localStorage.setItem('gck_lang', lang);
+		                } catch {}
+		                document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+		            }, [lang]);
+
+		            const t = useCallback(
+		                (key, vars) => {
+		                    const template = getI18nValue(lang, key) ?? getI18nValue('en', key) ?? key;
+		                    return vars ? formatTemplate(template, vars) : template;
+		                },
+		                [lang]
+		            );
+
+		            const i18n = useMemo(() => ({ lang, setLang, t }), [lang, t]);
+
+			            const [view, setView] = useState('home'); // 'home' | 'guide'
+			            const [searchQuery, setSearchQuery] = useState('');
+			            const [isUsageOpen, setIsUsageOpen] = useState(true);
+			            const [toast, setToast] = useState({ show: false, msg: '', type: 'success' });
+			            const [isStarPromptVisible, setIsStarPromptVisible] = useState(false);
+			            const starPromptTriggeredRef = useRef(false);
+
+			            const filteredIcons = useMemo(() => {
+		                const query = searchQuery.trim().toLowerCase();
+		                if (!query) return CHRISTMAS_ICONS;
+		                return CHRISTMAS_ICONS.filter((icon) => {
+		                    const enLabel = getI18nValue('en', `icons.${icon.id}`) || '';
+		                    const zhLabel = getI18nValue('zh', `icons.${icon.id}`) || '';
+		                    const haystack = `${icon.id} ${icon.name} ${enLabel} ${zhLabel}`.toLowerCase();
+		                    return haystack.includes(query);
+		                });
+		            }, [searchQuery]);
+
+			            const showToast = (msg, type = 'success') => {
+			                setToast({ show: true, msg, type });
+			                setTimeout(() => setToast((prev) => ({ ...prev, show: false })), 3000);
+			            };
+
+			            const triggerStarPrompt = useCallback(() => {
+			                if (starPromptTriggeredRef.current) return;
+
+			                const STAR_PROMPT_STORAGE_KEY = 'gck_star_prompt_until';
+			                const STAR_PROMPT_COOLDOWN_MS = 1 * 24 * 60 * 60 * 1000;
+			                const now = Date.now();
+
+			                let onCooldown = false;
+			                try {
+			                    const untilRaw = localStorage.getItem(STAR_PROMPT_STORAGE_KEY);
+			                    const until = untilRaw ? Number(untilRaw) : 0;
+			                    if (Number.isFinite(until) && until > now) onCooldown = true;
+			                } catch {}
+
+			                starPromptTriggeredRef.current = true;
+			                if (onCooldown) return;
+
+			                try {
+			                    localStorage.setItem(STAR_PROMPT_STORAGE_KEY, String(now + STAR_PROMPT_COOLDOWN_MS));
+			                } catch {}
+
+			                setIsStarPromptVisible(true);
+			            }, []);
+
+			            const dismissStarPrompt = useCallback(() => setIsStarPromptVisible(false), []);
+
+			            const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+		            const handleNavigate = (newView) => {
+		                setView(newView);
+		                scrollToTop();
+		            };
+
+		            return (
+		                <I18nContext.Provider value={i18n}>
+		                    <div className="relative min-h-screen">
+		                        <SnowEffect />
+		                        <ClickCheerEffect />
+
+		                        {/* Background Gradient Mesh */}
+		                        <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(30,58,138,0.15),transparent_70%)] pointer-events-none" />
+
+		                        {/* Main Content */}
+		                        <div className="relative z-10 max-w-6xl mx-auto px-4 pt-12 md:pt-20">
+		                            {view === 'home' ? (
+		                                <>
+		                                    {/* Header */}
+		                                    <div className="text-center mb-16 animate-slideIn">
+		                                        <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-xl tracking-tight">
+		                                            GitHub
+		                                            <span className="inline-block align-middle mx-3 -mt-1 md:-mt-2 text-3xl md:text-4xl animate-float cursor-default select-none drop-shadow-[0_0_12px_rgba(255,255,255,0.35)]">
+		                                                🎄
+		                                            </span>
+		                                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600">
+		                                                Christmas
+		                                            </span>{' '}
+		                                            <span className="relative inline-block">
+		                                                <img
+		                                                    src="assets/svg/santa-hat.svg"
+		                                                    alt=""
+		                                                    aria-hidden="true"
+		                                                    className="pointer-events-none select-none absolute left-0 top-0 z-10 w-12 h-12 md:w-14 md:h-14 drop-shadow-[0_10px_22px_rgba(0,0,0,0.55)]"
+		                                                    style={{ transform: 'translate(-55%, -65%) rotate(-22deg)' }}
+		                                                />
+		                                                Kit
+		                                            </span>
+		                                        </h1>
+
+		                                        <p className="text-lg text-slate-300 max-w-2xl mx-auto mb-1 leading-relaxed">
+		                                            {t('header.desc')}
+		                                            <br />
+		                                            <span className="text-slate-400 text-base">{t('header.disclaimer')}</span>
+		                                        </p>
+
+			                                        <div className="mt-3 flex flex-col items-center gap-3">
+				                                            <span
+				                                                className="app-tooltip inline-flex items-center overflow-hidden rounded-xl bg-slate-800/10 px-3 py-1"
+				                                                aria-label={t('tooltip.visitors')}
+				                                                data-tooltip={t('tooltip.visitors')}
+				                                            >
+			                                                <img
+			                                                    src="https://visitor-badge.laobi.icu/badge?page_id=kangchainx.christmas-readme-assets&style=flat-square&left_color=%2322c55e&right_color=%23ef4444"
+			                                                    alt={t('tooltip.visitors')}
+			                                                    className="h-6 w-auto opacity-90"
+			                                                    loading="lazy"
+			                                                />
+			                                            </span>
+			
+			                                            <div className="flex flex-wrap items-center justify-center gap-3">
+			                                                <button
+			                                                    type="button"
+			                                                    onClick={() => setLang((prev) => (prev === 'zh' ? 'en' : 'zh'))}
+			                                                    className="app-tooltip inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/40 hover:bg-slate-700/60 border border-slate-700/60 text-slate-200 transition-colors active:scale-[0.99]"
+			                                                    aria-label={t('tooltip.toggleLang')}
+			                                                    data-tooltip={t('tooltip.toggleLang')}
+			                                                >
+			                                                    <i className="ph ph-translate text-lg"></i>
+			                                                    <span className="text-sm font-medium">{lang === 'zh' ? '中文' : 'EN'}</span>
+			                                                </button>
+			
+			                                                <a
+			                                                    href={REPO_URL}
+			                                                    target="_blank"
+			                                                    rel="noreferrer"
+			                                                    className="app-tooltip inline-flex items-center justify-center w-11 h-11 rounded-full bg-slate-800/40 hover:bg-slate-700/60 border border-slate-700/60 text-slate-200 transition-colors"
+			                                                    aria-label={t('tooltip.github')}
+			                                                    data-tooltip={t('tooltip.github')}
+			                                                >
+			                                                    <i className="ph ph-github-logo text-xl"></i>
+			                                                </a>
+			
+			                                                <button
+			                                                    type="button"
+			                                                    onClick={() => handleNavigate('guide')}
+			                                                    className="app-tooltip inline-flex items-center justify-center w-11 h-11 rounded-full bg-slate-800/40 hover:bg-slate-700/60 border border-slate-700/60 text-slate-200 transition-colors"
+			                                                    aria-label={t('tooltip.guide')}
+			                                                    data-tooltip={t('tooltip.guide')}
+			                                                >
+			                                                    <i className="ph ph-book-open text-xl"></i>
+			                                                </button>
+			                                            </div>
+			                                        </div>
+		                                    </div>
+
+		                                    {/* Search / Filter */}
+		                                    <div className="max-w-2xl mx-auto mb-10 animate-slideIn">
+		                                        <div className="flex items-center gap-3">
+		                                            <div className="glass-panel flex-1 rounded-2xl p-2 border border-slate-700/50 flex items-center gap-2">
+		                                                <i className="ph ph-magnifying-glass text-slate-400 text-lg ml-2"></i>
+		                                                <input
+		                                                    value={searchQuery}
+		                                                    onChange={(e) => setSearchQuery(e.target.value)}
+		                                                    className="flex-1 bg-transparent text-slate-200 placeholder:text-slate-500 text-sm py-2 px-1 outline-none"
+		                                                    placeholder={t('search.placeholder')}
+		                                                    aria-label={t('search.placeholder')}
+		                                                />
+		                                                {searchQuery.trim() !== '' && (
+		                                                    <button
+		                                                        type="button"
+		                                                        onClick={() => setSearchQuery('')}
+		                                                        className="app-tooltip p-2 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+		                                                        aria-label={t('search.clear')}
+		                                                        data-tooltip={t('search.clear')}
+		                                                    >
+		                                                        <i className="ph ph-x text-lg"></i>
+		                                                    </button>
+		                                                )}
+		                                            </div>
+		                                            <button
+		                                                type="button"
+		                                                onClick={() => setIsUsageOpen(true)}
+		                                                className="app-tooltip inline-flex items-center justify-center w-11 h-11 rounded-full bg-slate-800/40 hover:bg-slate-700/60 border border-slate-700/60 text-slate-200 transition-colors"
+		                                                aria-label={t('tooltip.help')}
+		                                                data-tooltip={t('tooltip.help')}
+		                                            >
+		                                                <i className="ph ph-info text-xl"></i>
+		                                            </button>
+			                                        </div>
+			                                    </div>
+
+			                                    <StarPromptBanner isVisible={isStarPromptVisible} repoUrl={REPO_URL} onClose={dismissStarPrompt} />
+
+			                                    {/* Icon Grid */}
+			                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-16 animate-slideIn">
+			                                        {filteredIcons.length ? (
+			                                            filteredIcons.map((icon) => (
+			                                                <IconCard
+			                                                    key={icon.id}
+			                                                    icon={icon}
+			                                                    baseUrl={ICONS_BASE_URL}
+			                                                    repoHomeUrl={REPO_HOME_URL}
+			                                                    onCopy={showToast}
+			                                                    onCopySuccess={triggerStarPrompt}
+			                                                />
+			                                            ))
+			                                        ) : (
+			                                            <div className="col-span-full text-center text-slate-400 py-12">
+			                                                {t('search.empty')}
+		                                            </div>
+		                                        )}
+		                                    </div>
+
+		                                    {/* Contributor Lab */}
+		                                    <div className="animate-slideIn">
+		                                        <LabSection onCopy={showToast} />
+		                                    </div>
+
+		                                    {/* Footer */}
+		                                    <footer className="mt-20 pb-12 animate-slideIn">
+		                                        <CornerNotes repoUrl={REPO_URL} />
+		                                    </footer>
+		                                </>
+		                            ) : (
+		                                <ContributingGuide onBack={() => handleNavigate('home')} onCopy={showToast} />
+		                            )}
+		                        </div>
+
+			                        <UsageModal
+			                            isOpen={isUsageOpen}
+			                            onClose={() => setIsUsageOpen(false)}
+		                            baseUrl={ICONS_BASE_URL}
+		                            repoUrl={ICONS_REPO_URL}
+		                        />
+		                        <Toast isVisible={toast.show} message={toast.msg} type={toast.type} />
+		                    </div>
+		                </I18nContext.Provider>
+		            );
+		        };
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
