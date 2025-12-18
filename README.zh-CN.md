@@ -10,6 +10,7 @@
 ## 项目内容
 
 - `index.html`：单文件 SPA（React 18 + Tailwind CDN）
+- `assets/icons.json`：图标清单（网站列表/搜索的数据源）
 - `assets/svg/`：带循环动画的 SVG 图标（`viewBox="0 0 64 64"`）
 
 ## 如何使用
@@ -26,6 +27,39 @@
 ```md
 [![Santa Hat](https://kangchainx.github.io/github-christmas-kit/assets/svg/santa-hat.svg)](https://kangchainx.github.io/github-christmas-kit/)
 ```
+
+## 图标清单（`assets/icons.json`）
+
+网站会读取 `assets/icons.json` 来渲染图标列表与搜索。
+
+字段说明：
+
+- `id`：唯一标识（字符串）
+- `name`：SVG 文件名（不含 `.svg`）（字符串）
+- `labels`：可选的中英文名称
+  - `en`：English
+  - `zh`：简体中文
+
+示例：
+
+```json
+{
+  "id": "santa-hat",
+  "name": "santa-hat",
+  "labels": { "en": "Santa Hat", "zh": "圣诞帽" }
+}
+```
+
+注意：
+
+- 通过 HTTP(S) 访问（例如 GitHub Pages / 本地静态服务器）时，页面会 `fetch` 读取 `assets/icons.json`。
+- 直接用 `file://` 打开时，浏览器通常会阻止读取本地 JSON，因此 `index.html` 会使用内置的 fallback 列表。
+  - 建议用本地静态服务来预览与开发（见下方）。
+
+## 分页
+
+- 图标列表已分页：**每页 12 个**。
+- 搜索会自动回到第 1 页。
 
 ## 本地运行
 
@@ -53,8 +87,8 @@ npm run dev
 
 1. 设计一个 SVG 图标（小尺寸也要清晰），并包含循环动画（`repeatCount="indefinite"`）。
 2. 将文件放入 `assets/svg/`（文件名使用 kebab-case，例如 `santa-hat.svg`）。
-3. 提交 Pull Request。
-   - 可选：在 `index.html` 的 `assets/icons.json`（图标清单）中补充你的图标信息。
+3. 在 `assets/icons.json` 中新增一条记录（确保能出现在网站列表里）。
+4. 提交 Pull Request。
 
 小提示：你可以先在网站底部的「Contributor Lab / 贡献者实验室」里粘贴 SVG 代码实时预览，再提交 PR。
 

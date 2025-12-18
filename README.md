@@ -10,6 +10,7 @@ Live demo: https://kangchainx.github.io/github-christmas-kit/
 ## What’s inside
 
 - `index.html`: single-file SPA (React 18 + Tailwind via CDN)
+- `assets/icons.json`: icon manifest (the list shown on the site)
 - `assets/svg/`: animated SVG icons (`viewBox="0 0 64 64"`)
 
 ## Use the icons
@@ -26,6 +27,39 @@ Live demo: https://kangchainx.github.io/github-christmas-kit/
 ```md
 [![Santa Hat](https://kangchainx.github.io/github-christmas-kit/assets/svg/santa-hat.svg)](https://kangchainx.github.io/github-christmas-kit/)
 ```
+
+## Icon manifest (`assets/icons.json`)
+
+The website reads `assets/icons.json` to render the icon grid and search.
+
+Schema:
+
+- `id`: unique identifier (string)
+- `name`: SVG filename without `.svg` (string)
+- `labels`: optional i18n labels
+  - `en`: English
+  - `zh`: 简体中文
+
+Example:
+
+```json
+{
+  "id": "santa-hat",
+  "name": "santa-hat",
+  "labels": { "en": "Santa Hat", "zh": "圣诞帽" }
+}
+```
+
+Notes:
+
+- When served over HTTP(S) (e.g. GitHub Pages / local server), the app fetches `assets/icons.json`.
+- When opened via `file://`, browsers usually block `fetch()` for local files, so `index.html` uses a built-in fallback list.
+  - For the best contributor experience, use a local server (see below).
+
+## Pagination
+
+- The icon grid is paginated: **12 icons per page**.
+- Searching resets to page 1 automatically.
 
 ## Run locally
 
@@ -53,8 +87,8 @@ npm run dev
 
 1. Create an SVG icon (keep it readable at small sizes), with a looping animation (`repeatCount="indefinite"`).
 2. Put it into `assets/svg/` (kebab-case filename, e.g. `santa-hat.svg`).
-3. Open a Pull Request.
-   - Optional: add the icon entry to the `assets/icons.json` (icon manifest).
+3. Add an entry to `assets/icons.json` (so it appears in the site list).
+4. Open a Pull Request.
 
 Tip: You can preview your SVG in the website’s “Contributor Lab” section before submitting.
 
