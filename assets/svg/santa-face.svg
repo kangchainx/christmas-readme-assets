@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Santa face">
+  <defs>
+    <linearGradient id="hatRed" x1="0" y1="6" x2="0" y2="30">
+      <stop offset="0" stop-color="#fb7185" />
+      <stop offset="1" stop-color="#ef4444" />
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="22" x2="0" y2="46">
+      <stop offset="0" stop-color="#fde68a" />
+      <stop offset="1" stop-color="#fbbf24" />
+    </linearGradient>
+    <linearGradient id="beard" x1="0" y1="34" x2="0" y2="60">
+      <stop offset="0" stop-color="#ffffff" />
+      <stop offset="1" stop-color="#e2e8f0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Gentle bob (looping) -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0 0; 0 -1.6; 0 0" dur="2.1s" repeatCount="indefinite" />
+
+    <!-- Hat cap (behind head, tilt) -->
+    <g transform-origin="32 18">
+      <animateTransform attributeName="transform" type="rotate" values="-3 32 18; 3 32 18; -3 32 18" dur="2.1s" repeatCount="indefinite" />
+      <path
+        d="M18 24C19 13 33 9 44 13C54 16 56 28 47 32C40 35 34 30 27 35C22 38 18 33 18 24Z"
+        fill="url(#hatRed)"
+        stroke="#fff"
+        stroke-width="1.6"
+        stroke-linejoin="round"
+        opacity="0.98"
+      />
+    </g>
+
+    <!-- Face -->
+    <circle cx="32" cy="34" r="11.5" fill="url(#skin)" stroke="#fff" stroke-width="1.4" />
+
+    <!-- Hat brim + pom (in front) -->
+    <g transform-origin="32 18">
+      <animateTransform attributeName="transform" type="rotate" values="-3 32 18; 3 32 18; -3 32 18" dur="2.1s" repeatCount="indefinite" />
+      <rect x="14" y="21" width="36" height="9" rx="4.5" fill="#fff" opacity="0.97" stroke="#fff" stroke-width="1.2" />
+      <path d="M16 25.5H48" stroke="#e2e8f0" stroke-width="1.4" stroke-linecap="round" opacity="0.6" />
+      <circle cx="48" cy="16" r="5.6" fill="#fff" opacity="0.96" stroke="#fff" stroke-width="1.1">
+        <animate attributeName="r" values="5.6;6.2;5.6" dur="2.1s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="46.7" cy="14.6" r="1.9" fill="#e2e8f0" opacity="0.55">
+        <animate attributeName="opacity" values="0.35;0.65;0.35" dur="2.1s" repeatCount="indefinite" />
+      </circle>
+    </g>
+
+    <!-- Eyes (blink) -->
+    <circle cx="28" cy="33" r="2" fill="#0f172a">
+      <animate attributeName="r" values="2;2;0.2;2;2" keyTimes="0;0.44;0.5;0.56;1" dur="3.2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="36" cy="33" r="2" fill="#0f172a">
+      <animate attributeName="r" values="2;2;0.2;2;2" keyTimes="0;0.52;0.58;0.64;1" dur="3.2s" repeatCount="indefinite" />
+    </circle>
+
+    <!-- Cheeks (warm glow) -->
+    <circle cx="24" cy="36" r="3" fill="#fb7185" opacity="0.18">
+      <animate attributeName="opacity" values="0.12;0.22;0.12" dur="2.1s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="40" cy="36" r="3" fill="#fb7185" opacity="0.18">
+      <animate attributeName="opacity" values="0.22;0.12;0.22" dur="2.1s" repeatCount="indefinite" />
+    </circle>
+
+    <!-- Mustache (wiggle) -->
+    <g transform-origin="32 40">
+      <animateTransform attributeName="transform" type="scale" values="1 1; 1.04 0.98; 1 1" dur="2.1s" repeatCount="indefinite" />
+      <path
+        d="M32 40C28 36 22 37 22 41C22 44 28 45 32 42Z"
+        fill="#fff"
+        opacity="0.95"
+        stroke="#e2e8f0"
+        stroke-width="1"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M32 40C36 36 42 37 42 41C42 44 36 45 32 42Z"
+        fill="#fff"
+        opacity="0.95"
+        stroke="#e2e8f0"
+        stroke-width="1"
+        stroke-linejoin="round"
+      />
+    </g>
+
+    <!-- Nose -->
+    <circle cx="32" cy="39" r="2.2" fill="#fde68a" stroke="#fff" stroke-width="1" opacity="0.95" />
+
+    <!-- Beard -->
+    <path
+      d="M18 38C18 52 24 58 32 58C40 58 46 52 46 38C46 38 42 44 32 44C22 44 18 38 18 38Z"
+      fill="url(#beard)"
+      stroke="#fff"
+      stroke-width="1.6"
+      stroke-linejoin="round"
+    />
+    <path d="M22 48C26 52 38 52 42 48" stroke="#e2e8f0" stroke-width="1.4" stroke-linecap="round" opacity="0.65" />
+  </g>
+</svg>

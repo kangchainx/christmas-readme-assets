@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Holiday heart">
+  <defs>
+    <linearGradient id="heart" x1="0" y1="18" x2="0" y2="54">
+      <stop offset="0" stop-color="#fb7185"/>
+      <stop offset="1" stop-color="#ef4444"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="1.7" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Pulse (looping) -->
+  <g filter="url(#glow)" transform-origin="32 36">
+    <animateTransform attributeName="transform" type="scale" values="1;1.08;1" dur="1.6s" repeatCount="indefinite"/>
+
+    <path
+      d="M32 52C20 44 14 36 14 28C14 22 18 18 24 18C28 18 30.5 20.2 32 22.4C33.5 20.2 36 18 40 18C46 18 50 22 50 28C50 36 44 44 32 52Z"
+      fill="url(#heart)"
+      stroke="#fff"
+      stroke-width="1.8"
+      stroke-linejoin="round"
+    />
+
+    <path d="M22 28c2-4 8-6 10-1" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity="0.35"/>
+  </g>
+
+  <!-- Sparkles -->
+  <g opacity="0">
+    <path d="M52 20l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="#34d399" stroke="#fff" stroke-width="1" stroke-linejoin="round"/>
+    <animate attributeName="opacity" values="0;1;0" dur="1.6s" repeatCount="indefinite"/>
+  </g>
+  <g opacity="0">
+    <path d="M10 22l1.6 3.2 3.2 1.6-3.2 1.6L10 32l-1.6-3.2-3.2-1.6 3.2-1.6z" fill="#fde68a" stroke="#fff" stroke-width="1" stroke-linejoin="round"/>
+    <animate attributeName="opacity" values="0;1;0" dur="1.6s" begin="0.5s" repeatCount="indefinite"/>
+  </g>
+</svg>

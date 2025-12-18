@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Hot chocolate">
+  <defs>
+    <linearGradient id="mug" x1="0" y1="24" x2="0" y2="60">
+      <stop offset="0" stop-color="#475569" />
+      <stop offset="1" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="cocoa" x1="0" y1="24" x2="0" y2="40">
+      <stop offset="0" stop-color="#7c2d12" />
+      <stop offset="1" stop-color="#451a03" />
+    </linearGradient>
+  </defs>
+
+  <!-- Steam (looping) -->
+  <g fill="none" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" opacity="0.65">
+    <path d="M22 10C20 14 22 16 22 20C22 24 20 26 18 28">
+      <animate attributeName="opacity" values="0.1;0.7;0.1" dur="2.2s" repeatCount="indefinite" />
+    </path>
+    <path d="M32 8C30 12 32 14 32 18C32 22 30 24 28 26">
+      <animate attributeName="opacity" values="0.7;0.1;0.7" dur="2.2s" begin="0.3s" repeatCount="indefinite" />
+    </path>
+    <path d="M42 10C40 14 42 16 42 20C42 24 40 26 38 28">
+      <animate attributeName="opacity" values="0.1;0.7;0.1" dur="2.2s" begin="0.6s" repeatCount="indefinite" />
+    </path>
+  </g>
+
+  <!-- Mug (gentle bob) -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0 0; 0 -1; 0 0" dur="2.2s" repeatCount="indefinite" />
+
+    <rect x="18" y="24" width="28" height="30" rx="8" fill="url(#mug)" stroke="#fff" stroke-width="1.6" />
+    <path d="M46 30H50C54 30 56 32 56 36C56 40 54 42 50 42H46" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" />
+
+    <!-- Cocoa -->
+    <rect x="20" y="24" width="24" height="10" rx="5" fill="url(#cocoa)" stroke="#fff" stroke-width="1.2" />
+    <circle cx="26" cy="24" r="4" fill="#fff" opacity="0.95" />
+    <circle cx="32" cy="22" r="4.4" fill="#fff" opacity="0.95" />
+    <circle cx="38" cy="24" r="4" fill="#fff" opacity="0.95" />
+
+    <!-- Candy cane straw -->
+    <path d="M40 16C40 12 44 10 48 10C52 10 54 12 54 14" fill="none" stroke="#ef4444" stroke-width="4" stroke-linecap="round" />
+    <path d="M40 16C40 12 44 10 48 10C52 10 54 12 54 14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 6" opacity="0.95" />
+  </g>
+</svg>

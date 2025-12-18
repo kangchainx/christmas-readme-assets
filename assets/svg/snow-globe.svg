@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Snow globe">
+  <defs>
+    <linearGradient id="globeBase" x1="0" y1="44" x2="0" y2="62">
+      <stop offset="0" stop-color="#fb7185" />
+      <stop offset="1" stop-color="#ef4444" />
+    </linearGradient>
+    <linearGradient id="treeGreen" x1="0" y1="16" x2="0" y2="44">
+      <stop offset="0" stop-color="#34d399" />
+      <stop offset="1" stop-color="#15803d" />
+    </linearGradient>
+  </defs>
+
+  <!-- Globe -->
+  <circle cx="32" cy="28" r="18" fill="#38bdf8" opacity="0.10" stroke="#fff" stroke-width="1.6" />
+  <path d="M22 18C26 14 38 14 42 18" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity="0.35" />
+
+  <!-- Snow swirl (looping) -->
+  <g transform-origin="32 28">
+    <animateTransform attributeName="transform" type="rotate" values="0 32 28; 360 32 28" dur="5.2s" repeatCount="indefinite" />
+    <circle cx="32" cy="14" r="1.6" fill="#fff" opacity="0.9" />
+    <circle cx="44" cy="20" r="1.3" fill="#e2e8f0" opacity="0.85" />
+    <circle cx="46" cy="30" r="1.4" fill="#fff" opacity="0.9" />
+    <circle cx="40" cy="38" r="1.2" fill="#e2e8f0" opacity="0.8" />
+    <circle cx="28" cy="42" r="1.5" fill="#fff" opacity="0.85" />
+    <circle cx="18" cy="34" r="1.2" fill="#e2e8f0" opacity="0.8" />
+    <circle cx="18" cy="22" r="1.4" fill="#fff" opacity="0.85" />
+  </g>
+
+  <!-- Tiny tree inside -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0 0; 0 -0.8; 0 0" dur="2.6s" repeatCount="indefinite" />
+    <path d="M32 16L24 28H40Z" fill="url(#treeGreen)" stroke="#fff" stroke-width="1.2" stroke-linejoin="round" />
+    <path d="M32 22L22 38H42Z" fill="url(#treeGreen)" stroke="#fff" stroke-width="1.2" stroke-linejoin="round" opacity="0.95" />
+    <rect x="30" y="38" width="4" height="6" rx="1" fill="#78350f" stroke="#fff" stroke-width="1" />
+    <circle cx="28" cy="28" r="1.6" fill="#ef4444">
+      <animate attributeName="opacity" values="0.25;1;0.25" dur="1.3s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="36" cy="32" r="1.6" fill="#fbbf24">
+      <animate attributeName="opacity" values="1;0.25;1" dur="1.5s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- Base -->
+  <rect x="18" y="46" width="28" height="12" rx="6" fill="url(#globeBase)" stroke="#fff" stroke-width="1.6" />
+  <path d="M22 52H42" stroke="#fde68a" stroke-width="2" stroke-linecap="round" opacity="0.55">
+    <animate attributeName="opacity" values="0.25;0.55;0.25" dur="2.6s" repeatCount="indefinite" />
+  </path>
+</svg>

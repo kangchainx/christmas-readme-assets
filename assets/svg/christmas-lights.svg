@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Christmas lights">
+  <!-- Wire -->
+  <path d="M8 30C16 18 48 18 56 30" fill="none" stroke="#e2e8f0" stroke-width="2.2" stroke-linecap="round" opacity="0.85" />
+
+  <g stroke="#fff" stroke-width="1.2" stroke-linejoin="round">
+    <!-- Bulb 1 -->
+    <g transform="translate(14 24)">
+      <rect x="0" y="0" width="6" height="4" rx="2" fill="#334155" opacity="0.9" />
+      <circle cx="3" cy="9" r="4.6" fill="#ef4444" opacity="0.9">
+        <animate attributeName="opacity" values="0.25;1;0.25" dur="1.4s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="3" cy="9" r="7" fill="#ef4444" stroke="none" opacity="0.08">
+        <animate attributeName="opacity" values="0.02;0.12;0.02" dur="1.4s" repeatCount="indefinite" />
+      </circle>
+    </g>
+
+    <!-- Bulb 2 -->
+    <g transform="translate(24 20)">
+      <rect x="0" y="0" width="6" height="4" rx="2" fill="#334155" opacity="0.9" />
+      <circle cx="3" cy="9" r="4.6" fill="#22c55e" opacity="0.9">
+        <animate attributeName="opacity" values="1;0.25;1" dur="1.4s" begin="0.2s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="3" cy="9" r="7" fill="#22c55e" stroke="none" opacity="0.08">
+        <animate attributeName="opacity" values="0.12;0.02;0.12" dur="1.4s" begin="0.2s" repeatCount="indefinite" />
+      </circle>
+    </g>
+
+    <!-- Bulb 3 -->
+    <g transform="translate(34 18)">
+      <rect x="0" y="0" width="6" height="4" rx="2" fill="#334155" opacity="0.9" />
+      <circle cx="3" cy="9" r="4.6" fill="#fbbf24" opacity="0.9">
+        <animate attributeName="opacity" values="0.25;1;0.25" dur="1.4s" begin="0.4s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="3" cy="9" r="7" fill="#fbbf24" stroke="none" opacity="0.08">
+        <animate attributeName="opacity" values="0.02;0.12;0.02" dur="1.4s" begin="0.4s" repeatCount="indefinite" />
+      </circle>
+    </g>
+
+    <!-- Bulb 4 -->
+    <g transform="translate(44 20)">
+      <rect x="0" y="0" width="6" height="4" rx="2" fill="#334155" opacity="0.9" />
+      <circle cx="3" cy="9" r="4.6" fill="#60a5fa" opacity="0.9">
+        <animate attributeName="opacity" values="1;0.25;1" dur="1.4s" begin="0.6s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="3" cy="9" r="7" fill="#60a5fa" stroke="none" opacity="0.08">
+        <animate attributeName="opacity" values="0.12;0.02;0.12" dur="1.4s" begin="0.6s" repeatCount="indefinite" />
+      </circle>
+    </g>
+
+    <!-- Bulb 5 -->
+    <g transform="translate(52 24)">
+      <rect x="0" y="0" width="6" height="4" rx="2" fill="#334155" opacity="0.9" />
+      <circle cx="3" cy="9" r="4.6" fill="#fb7185" opacity="0.9">
+        <animate attributeName="opacity" values="0.25;1;0.25" dur="1.4s" begin="0.8s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="3" cy="9" r="7" fill="#fb7185" stroke="none" opacity="0.08">
+        <animate attributeName="opacity" values="0.02;0.12;0.02" dur="1.4s" begin="0.8s" repeatCount="indefinite" />
+      </circle>
+    </g>
+  </g>
+</svg>

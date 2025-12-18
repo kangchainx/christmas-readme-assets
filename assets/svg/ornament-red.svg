@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Ornament (Red)">
+  <defs>
+    <radialGradient id="orb" cx="30" cy="30" r="22" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fecdd3"/>
+      <stop offset="1" stop-color="#ef4444"/>
+    </radialGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="1.4" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Float (looping) -->
+  <g filter="url(#glow)">
+    <animateTransform attributeName="transform" type="translate" values="0 0; 0 -2; 0 0" dur="2.2s" repeatCount="indefinite"/>
+
+    <!-- Ornament -->
+    <circle cx="32" cy="32" r="16" fill="url(#orb)" stroke="#fff" stroke-width="1.6"/>
+
+    <!-- Shine (looping) -->
+    <path d="M26 22C22 28 22 36 26 42" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity="0.35">
+      <animate attributeName="opacity" values="0.18;0.5;0.18" dur="2.2s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- Accent sparkle -->
+    <g opacity="0">
+      <path d="M48 28l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="#fb7185" stroke="#fff" stroke-width="1" stroke-linejoin="round"/>
+      <animate attributeName="opacity" values="0;0.9;0" dur="2.2s" repeatCount="indefinite"/>
+    </g>
+
+    <!-- Tiny glints -->
+    <circle cx="44" cy="46" r="1.2" fill="#fff" opacity="0.0">
+      <animate attributeName="opacity" values="0;0.75;0" dur="2.2s" begin="0.7s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="20" cy="42" r="1.0" fill="#e2e8f0" opacity="0.0">
+      <animate attributeName="opacity" values="0;0.65;0" dur="2.2s" begin="1.2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

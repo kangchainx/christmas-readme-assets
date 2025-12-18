@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Advent calendar">
+  <defs>
+    <linearGradient id="calRed" x1="0" y1="10" x2="0" y2="60">
+      <stop offset="0" stop-color="#fb7185" />
+      <stop offset="1" stop-color="#ef4444" />
+    </linearGradient>
+    <linearGradient id="calGold" x1="0" y1="24" x2="0" y2="48">
+      <stop offset="0" stop-color="#fde68a" />
+      <stop offset="1" stop-color="#fbbf24" />
+    </linearGradient>
+  </defs>
+
+  <!-- Page -->
+  <rect x="14" y="12" width="36" height="44" rx="8" fill="url(#calRed)" stroke="#fff" stroke-width="1.6" />
+
+  <!-- Rings -->
+  <rect x="20" y="8" width="6" height="10" rx="3" fill="#e2e8f0" opacity="0.9" />
+  <rect x="38" y="8" width="6" height="10" rx="3" fill="#e2e8f0" opacity="0.9" />
+
+  <!-- Surprise star behind door -->
+  <path
+    d="M32 26l2.2 4.8 5.2.8-3.7 3.7.9 5.2-4.6-2.7-4.6 2.7.9-5.2-3.7-3.7 5.2-.8z"
+    fill="url(#calGold)"
+    stroke="#fff"
+    stroke-width="1.2"
+    stroke-linejoin="round"
+    opacity="0.85"
+  >
+    <animate attributeName="opacity" values="0.5;1;0.5" dur="1.6s" repeatCount="indefinite" />
+  </path>
+
+  <!-- Door (opens) -->
+  <g transform-origin="24 36">
+    <animateTransform attributeName="transform" type="rotate" values="0 24 36; -70 24 36; 0 24 36" dur="2.8s" repeatCount="indefinite" />
+    <rect x="24" y="28" width="18" height="18" rx="4" fill="#b91c1c" stroke="#fff" stroke-width="1.4" />
+    <path d="M24 28H42" stroke="#fb7185" stroke-width="1.2" opacity="0.45" />
+    <text x="33" y="41" text-anchor="middle" font-size="10" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-weight="800" fill="#fff">25</text>
+    <circle cx="40" cy="37" r="1" fill="#fde68a" opacity="0.9" />
+  </g>
+</svg>

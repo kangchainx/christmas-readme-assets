@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Smiley with Santa hat">
+  <defs>
+    <radialGradient id="face" cx="28" cy="26" r="26" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fde68a"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </radialGradient>
+    <linearGradient id="hatRed" x1="0" y1="6" x2="0" y2="28">
+      <stop offset="0" stop-color="#fb7185"/>
+      <stop offset="1" stop-color="#ef4444"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="1.4" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Float (looping) -->
+  <g filter="url(#glow)">
+    <animateTransform attributeName="transform" type="translate" values="0 0; 0 -1.8; 0 0" dur="2.1s" repeatCount="indefinite"/>
+
+    <!-- Hat (behind) -->
+    <g transform-origin="32 18">
+      <animateTransform attributeName="transform" type="rotate" values="-4 32 18; 4 32 18; -4 32 18" dur="2.1s" repeatCount="indefinite"/>
+      <path d="M16 22C18 10 36 8 46 14C56 20 52 32 42 30C35 29 30 26 24 30C18 33 15 28 16 22Z" fill="url(#hatRed)" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/>
+    </g>
+
+    <!-- Face -->
+    <circle cx="32" cy="38" r="14" fill="url(#face)" stroke="#fff" stroke-width="1.6"/>
+
+    <!-- Hat brim + pom (front) -->
+    <g transform-origin="32 18">
+      <animateTransform attributeName="transform" type="rotate" values="-4 32 18; 4 32 18; -4 32 18" dur="2.1s" repeatCount="indefinite"/>
+      <rect x="14" y="22" width="36" height="9" rx="4.5" fill="#fff" opacity="0.97" stroke="#fff" stroke-width="1.2"/>
+      <circle cx="50" cy="18" r="5.2" fill="#fff" opacity="0.96" stroke="#fff" stroke-width="1.1">
+        <animate attributeName="r" values="5.2;5.9;5.2" dur="2.1s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+
+    <!-- Eyes (wink) -->
+    <circle cx="26" cy="36" r="2" fill="#0f172a">
+      <animate attributeName="r" values="2;2;0.2;2;2" keyTimes="0;0.45;0.5;0.55;1" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <path d="M36 36c2 0 4 0 6 0" stroke="#0f172a" stroke-width="2.4" stroke-linecap="round"/>
+
+    <!-- Smile -->
+    <path d="M24 42c3.2 4 12.8 4 16 0" fill="none" stroke="#0f172a" stroke-width="2.6" stroke-linecap="round"/>
+
+    <!-- Sparkle -->
+    <g opacity="0">
+      <path d="M52 40l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="#34d399" stroke="#fff" stroke-width="1" stroke-linejoin="round"/>
+      <animate attributeName="opacity" values="0;1;0" dur="2.1s" repeatCount="indefinite"/>
+    </g>
+  </g>
+</svg>

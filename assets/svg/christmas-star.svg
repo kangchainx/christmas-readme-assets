@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Christmas star">
+  <defs>
+    <linearGradient id="starGold" x1="0" y1="6" x2="0" y2="56">
+      <stop offset="0" stop-color="#fde68a" />
+      <stop offset="1" stop-color="#fbbf24" />
+    </linearGradient>
+  </defs>
+
+  <!-- Rotate + glow (looping) -->
+  <g transform-origin="32 32">
+    <animateTransform attributeName="transform" type="rotate" values="-8 32 32; 8 32 32; -8 32 32" dur="2.4s" repeatCount="indefinite" />
+
+    <path
+      d="M32 8L38 22L54 24L42 35L45 52L32 44L19 52L22 35L10 24L26 22Z"
+      fill="url(#starGold)"
+      stroke="#fff"
+      stroke-width="1.6"
+      stroke-linejoin="round"
+    >
+      <animate attributeName="opacity" values="0.85;1;0.85" dur="1.2s" repeatCount="indefinite" />
+    </path>
+
+    <!-- Spark lines -->
+    <g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity="0.6">
+      <path d="M32 4V10">
+        <animate attributeName="opacity" values="0.15;0.7;0.15" dur="1.2s" repeatCount="indefinite" />
+      </path>
+      <path d="M32 54V60">
+        <animate attributeName="opacity" values="0.7;0.15;0.7" dur="1.2s" repeatCount="indefinite" />
+      </path>
+      <path d="M4 32H10">
+        <animate attributeName="opacity" values="0.15;0.7;0.15" dur="1.2s" begin="0.2s" repeatCount="indefinite" />
+      </path>
+      <path d="M54 32H60">
+        <animate attributeName="opacity" values="0.7;0.15;0.7" dur="1.2s" begin="0.2s" repeatCount="indefinite" />
+      </path>
+    </g>
+  </g>
+</svg>

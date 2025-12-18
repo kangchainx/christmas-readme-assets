@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Santa sleigh">
+  <defs>
+    <linearGradient id="sleighRed" x1="0" y1="22" x2="0" y2="54">
+      <stop offset="0" stop-color="#fb7185" />
+      <stop offset="1" stop-color="#ef4444" />
+    </linearGradient>
+    <linearGradient id="runnerGold" x1="0" y1="44" x2="0" y2="60">
+      <stop offset="0" stop-color="#fde68a" />
+      <stop offset="1" stop-color="#fbbf24" />
+    </linearGradient>
+  </defs>
+
+  <!-- Float (looping) -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0 0; 0 -1.2; 0 0" dur="1.8s" repeatCount="indefinite" />
+
+    <!-- Sleigh body -->
+    <path
+      d="M16 40C16 34 20 30 26 30H38C44 30 48 34 48 40V44H16V40Z"
+      fill="url(#sleighRed)"
+      stroke="#fff"
+      stroke-width="1.6"
+      stroke-linejoin="round"
+    />
+    <!-- Front curl -->
+    <path
+      d="M48 44C54 44 56 38 52 34C48 30 40 32 40 26C40 22 44 20 48 20"
+      fill="none"
+      stroke="url(#runnerGold)"
+      stroke-width="3.2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <!-- Seat / back -->
+    <path d="M20 30V24C20 20 24 18 28 18H32V30H20Z" fill="url(#sleighRed)" stroke="#fff" stroke-width="1.6" stroke-linejoin="round" />
+
+    <!-- Gift peeking out -->
+    <rect x="30" y="20" width="14" height="14" rx="3" fill="#22c55e" stroke="#fff" stroke-width="1.4" />
+    <path d="M37 20V34" stroke="#fde68a" stroke-width="2.2" opacity="0.9" />
+    <path d="M30 27H44" stroke="#fde68a" stroke-width="2.2" opacity="0.9" />
+    <circle cx="37" cy="20" r="2" fill="#fff" opacity="0.85">
+      <animate attributeName="opacity" values="0.5;0.95;0.5" dur="1.8s" repeatCount="indefinite" />
+    </circle>
+
+    <!-- Runners -->
+    <path
+      d="M12 46C18 54 34 56 52 52"
+      fill="none"
+      stroke="url(#runnerGold)"
+      stroke-width="3.4"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path d="M16 46V42" stroke="url(#runnerGold)" stroke-width="3" stroke-linecap="round" />
+    <path d="M28 46V42" stroke="url(#runnerGold)" stroke-width="3" stroke-linecap="round" />
+    <path d="M40 46V42" stroke="url(#runnerGold)" stroke-width="3" stroke-linecap="round" />
+  </g>
+
+  <!-- Sparkle behind -->
+  <path d="M10 26l1.3 2.8 3.1.5-2.2 2.2.5 3.1L10 34l-2.7 1.6.5-3.1-2.2-2.2 3.1-.5z" fill="#fff" opacity="0">
+    <animate attributeName="opacity" values="0;0.55;0" dur="1.8s" repeatCount="indefinite" />
+  </path>
+</svg>

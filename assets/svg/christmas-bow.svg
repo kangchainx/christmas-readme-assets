@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Christmas bow">
+  <defs>
+    <linearGradient id="bowRed" x1="0" y1="14" x2="0" y2="56">
+      <stop offset="0" stop-color="#fb7185" />
+      <stop offset="1" stop-color="#ef4444" />
+    </linearGradient>
+    <linearGradient id="bowGold" x1="0" y1="18" x2="0" y2="56">
+      <stop offset="0" stop-color="#fde68a" />
+      <stop offset="1" stop-color="#fbbf24" />
+    </linearGradient>
+  </defs>
+
+  <!-- Pulse (looping) -->
+  <g transform-origin="32 34">
+    <animateTransform attributeName="transform" type="scale" values="1;1.04;1" dur="1.8s" repeatCount="indefinite" />
+
+    <!-- Left loop -->
+    <path
+      d="M32 34C26 26 18 24 16 28C14 32 18 38 26 38C28 38 30 36 32 34Z"
+      fill="url(#bowRed)"
+      stroke="#fff"
+      stroke-width="1.6"
+      stroke-linejoin="round"
+    />
+
+    <!-- Right loop -->
+    <path
+      d="M32 34C38 26 46 24 48 28C50 32 46 38 38 38C36 38 34 36 32 34Z"
+      fill="url(#bowRed)"
+      stroke="#fff"
+      stroke-width="1.6"
+      stroke-linejoin="round"
+    />
+
+    <!-- Knot -->
+    <circle cx="32" cy="34" r="4.2" fill="url(#bowGold)" stroke="#fff" stroke-width="1.6" />
+    <circle cx="31" cy="33" r="1.2" fill="#fff" opacity="0.6">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="1.8s" repeatCount="indefinite" />
+    </circle>
+
+    <!-- Tails -->
+    <path
+      d="M28 38L22 56L30 50L34 56L36 40"
+      fill="url(#bowRed)"
+      stroke="#fff"
+      stroke-width="1.6"
+      stroke-linejoin="round"
+    />
+
+    <!-- Shine -->
+    <path d="M18 30C20 28 24 28 26 30" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.2">
+      <animate attributeName="opacity" values="0.12;0.28;0.12" dur="1.8s" repeatCount="indefinite" />
+    </path>
+  </g>
+</svg>

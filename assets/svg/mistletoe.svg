@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Mistletoe">
+  <defs>
+    <linearGradient id="leafGreen" x1="0" y1="14" x2="0" y2="56">
+      <stop offset="0" stop-color="#34d399" />
+      <stop offset="1" stop-color="#15803d" />
+    </linearGradient>
+  </defs>
+
+  <!-- Pulse (looping) -->
+  <g transform-origin="32 34">
+    <animateTransform attributeName="transform" type="scale" values="1;1.04;1" dur="1.9s" repeatCount="indefinite" />
+
+    <!-- Leaves -->
+    <path
+      d="M14 34C14 22 26 16 34 22C40 26 40 36 32 40C24 44 14 44 14 34Z"
+      fill="url(#leafGreen)"
+      stroke="#fff"
+      stroke-width="1.6"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M50 34C50 22 38 16 30 22C24 26 24 36 32 40C40 44 50 44 50 34Z"
+      fill="url(#leafGreen)"
+      stroke="#fff"
+      stroke-width="1.6"
+      stroke-linejoin="round"
+    />
+
+    <!-- Veins -->
+    <path d="M32 24V44" stroke="#e2e8f0" stroke-width="1.2" stroke-linecap="round" opacity="0.65" />
+    <path d="M22 30C26 30 28 32 30 34" stroke="#e2e8f0" stroke-width="1.2" stroke-linecap="round" opacity="0.5" />
+    <path d="M42 30C38 30 36 32 34 34" stroke="#e2e8f0" stroke-width="1.2" stroke-linecap="round" opacity="0.5" />
+
+    <!-- Berries (twinkle) -->
+    <circle cx="32" cy="44" r="3.4" fill="#ef4444" stroke="#fff" stroke-width="1.2">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="1.2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="26" cy="46" r="2.8" fill="#fb7185" stroke="#fff" stroke-width="1.1" opacity="0.95">
+      <animate attributeName="opacity" values="1;0.55;1" dur="1.4s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="38" cy="46" r="2.8" fill="#fb7185" stroke="#fff" stroke-width="1.1" opacity="0.95">
+      <animate attributeName="opacity" values="0.55;1;0.55" dur="1.6s" repeatCount="indefinite" />
+    </circle>
+  </g>
+</svg>

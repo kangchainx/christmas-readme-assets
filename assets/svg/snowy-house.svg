@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Snowy house">
+  <defs>
+    <linearGradient id="house" x1="0" y1="22" x2="0" y2="60">
+      <stop offset="0" stop-color="#334155" />
+      <stop offset="1" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="roof" x1="0" y1="16" x2="0" y2="36">
+      <stop offset="0" stop-color="#fb7185" />
+      <stop offset="1" stop-color="#ef4444" />
+    </linearGradient>
+  </defs>
+
+  <!-- Roof -->
+  <path d="M12 34L32 18L52 34" fill="url(#roof)" stroke="#fff" stroke-width="1.6" stroke-linejoin="round" />
+  <path d="M18 30L20 34H44L46 30" fill="#fff" opacity="0.9" />
+
+  <!-- House body -->
+  <rect x="18" y="34" width="28" height="22" rx="4" fill="url(#house)" stroke="#fff" stroke-width="1.6" />
+
+  <!-- Door -->
+  <rect x="28" y="42" width="8" height="14" rx="3" fill="#1f2937" stroke="#fff" stroke-width="1.2" />
+  <circle cx="34" cy="49" r="1.1" fill="#fde68a" opacity="0.8" />
+
+  <!-- Window (glow) -->
+  <rect x="22" y="40" width="6" height="6" rx="1.4" fill="#fde68a" stroke="#fff" stroke-width="1.2" opacity="0.9">
+    <animate attributeName="opacity" values="0.55;1;0.55" dur="1.8s" repeatCount="indefinite" />
+  </rect>
+  <path d="M25 40V46" stroke="#fff" stroke-width="1" opacity="0.65" />
+  <path d="M22 43H28" stroke="#fff" stroke-width="1" opacity="0.65" />
+
+  <!-- Chimney -->
+  <rect x="40" y="22" width="6" height="10" rx="1.2" fill="#475569" stroke="#fff" stroke-width="1.2" />
+
+  <!-- Smoke (looping) -->
+  <g fill="none" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" opacity="0.65">
+    <path d="M46 20C48 18 48 16 46 14">
+      <animate attributeName="opacity" values="0.1;0.7;0.1" dur="2.2s" repeatCount="indefinite" />
+    </path>
+    <path d="M50 22C52 20 52 18 50 16">
+      <animate attributeName="opacity" values="0.7;0.1;0.7" dur="2.2s" begin="0.3s" repeatCount="indefinite" />
+    </path>
+  </g>
+
+  <!-- Snow ground -->
+  <path d="M12 56C18 54 24 54 32 56C40 58 46 58 52 56" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity="0.7" />
+</svg>

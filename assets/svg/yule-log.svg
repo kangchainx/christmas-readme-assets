@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Yule log">
+  <defs>
+    <linearGradient id="wood" x1="0" y1="30" x2="0" y2="56">
+      <stop offset="0" stop-color="#92400e" />
+      <stop offset="1" stop-color="#78350f" />
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="14" x2="0" y2="34">
+      <stop offset="0" stop-color="#34d399" />
+      <stop offset="1" stop-color="#15803d" />
+    </linearGradient>
+    <linearGradient id="flame" x1="0" y1="18" x2="0" y2="42">
+      <stop offset="0" stop-color="#fde68a" />
+      <stop offset="0.6" stop-color="#fbbf24" />
+      <stop offset="1" stop-color="#ef4444" />
+    </linearGradient>
+  </defs>
+
+  <!-- Log -->
+  <rect x="14" y="34" width="36" height="18" rx="8" fill="url(#wood)" stroke="#fff" stroke-width="1.6" />
+  <circle cx="18" cy="43" r="7" fill="#a16207" stroke="#fff" stroke-width="1.4" />
+  <circle cx="18" cy="43" r="3.6" fill="#78350f" opacity="0.85" />
+  <path d="M18 39C20 41 20 45 18 47" stroke="#e2e8f0" stroke-width="1.2" stroke-linecap="round" opacity="0.55" />
+
+  <!-- Frosting stripe (twinkle) -->
+  <path d="M24 40C30 38 36 38 44 40" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity="0.55">
+    <animate attributeName="opacity" values="0.35;0.65;0.35" dur="2.1s" repeatCount="indefinite" />
+  </path>
+
+  <!-- Holly leaves -->
+  <path d="M46 28C42 26 40 22 42 20C44 18 48 20 50 24C48 25 47 27 46 28Z" fill="url(#leaf)" stroke="#fff" stroke-width="1.2" stroke-linejoin="round" />
+  <path d="M52 30C56 28 58 24 56 22C54 20 50 22 48 26C50 27 51 29 52 30Z" fill="url(#leaf)" stroke="#fff" stroke-width="1.2" stroke-linejoin="round" />
+
+  <!-- Berries -->
+  <circle cx="50" cy="32" r="2.8" fill="#ef4444" stroke="#fff" stroke-width="1.2">
+    <animate attributeName="r" values="2.8;3.2;2.8" dur="1.4s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="54" cy="33" r="2.2" fill="#fb7185" stroke="#fff" stroke-width="1.1" opacity="0.95">
+    <animate attributeName="opacity" values="0.55;1;0.55" dur="1.4s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- Flame (flicker, looping) -->
+  <g transform-origin="36 32">
+    <animateTransform attributeName="transform" type="scale" values="1;1.08;0.96;1" dur="1.1s" repeatCount="indefinite" />
+
+    <path d="M36 18C32 24 34 28 36 32C38 28 40 24 36 18Z" fill="url(#flame)" stroke="#fff" stroke-width="1.2" stroke-linejoin="round" />
+    <path d="M36 22C35 25 35.5 27 36 28.5C36.5 27 37 25 36 22Z" fill="#fde68a" stroke="#fff" stroke-width="1" stroke-linejoin="round" opacity="0.95" />
+  </g>
+
+  <!-- Warm glow -->
+  <circle cx="36" cy="32" r="10" fill="#fbbf24" opacity="0.07">
+    <animate attributeName="opacity" values="0.04;0.11;0.04" dur="1.1s" repeatCount="indefinite" />
+  </circle>
+</svg>

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Jingle bells">
+  <defs>
+    <linearGradient id="bellsGold" x1="0" y1="14" x2="0" y2="56">
+      <stop offset="0" stop-color="#fde68a" />
+      <stop offset="1" stop-color="#fbbf24" />
+    </linearGradient>
+    <linearGradient id="ribbonRed" x1="0" y1="8" x2="0" y2="28">
+      <stop offset="0" stop-color="#fb7185" />
+      <stop offset="1" stop-color="#ef4444" />
+    </linearGradient>
+  </defs>
+
+  <!-- Ring (looping) -->
+  <g transform-origin="32 14">
+    <animateTransform attributeName="transform" type="rotate" values="-8 32 14; 8 32 14; -8 32 14" dur="1.4s" repeatCount="indefinite" />
+
+    <!-- Ribbon -->
+    <path d="M32 14C28 10 24 10 22 12C20 14 22 18 26 18C28 18 30 16 32 14Z" fill="url(#ribbonRed)" stroke="#fff" stroke-width="1.2" stroke-linejoin="round" />
+    <path d="M32 14C36 10 40 10 42 12C44 14 42 18 38 18C36 18 34 16 32 14Z" fill="url(#ribbonRed)" stroke="#fff" stroke-width="1.2" stroke-linejoin="round" />
+    <circle cx="32" cy="14" r="1.6" fill="#fff" opacity="0.9" />
+
+    <!-- Left bell -->
+    <path
+      d="M16 28C16 20 32 20 32 28V38C32 46 26 52 24 52C22 52 16 46 16 38V28Z"
+      fill="url(#bellsGold)"
+      stroke="#fff"
+      stroke-width="1.6"
+      stroke-linejoin="round"
+    />
+    <path d="M14 38H34" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity="0.9" />
+    <circle cx="24" cy="52" r="4.8" fill="url(#bellsGold)" stroke="#fff" stroke-width="1.4">
+      <animate attributeName="cy" values="52;53;52" dur="1.4s" repeatCount="indefinite" />
+    </circle>
+
+    <!-- Right bell -->
+    <path
+      d="M32 28C32 20 48 20 48 28V38C48 46 42 52 40 52C38 52 32 46 32 38V28Z"
+      fill="url(#bellsGold)"
+      stroke="#fff"
+      stroke-width="1.6"
+      stroke-linejoin="round"
+      opacity="0.98"
+    />
+    <path d="M30 38H50" stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity="0.9" />
+    <circle cx="40" cy="52" r="4.8" fill="url(#bellsGold)" stroke="#fff" stroke-width="1.4">
+      <animate attributeName="cy" values="52;53;52" dur="1.4s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- Sound lines -->
+  <g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity="0.55">
+    <path d="M8 30C10 28 10 26 8 24">
+      <animate attributeName="opacity" values="0.1;0.6;0.1" dur="1.4s" repeatCount="indefinite" />
+    </path>
+    <path d="M56 30C54 28 54 26 56 24">
+      <animate attributeName="opacity" values="0.6;0.1;0.6" dur="1.4s" repeatCount="indefinite" />
+    </path>
+  </g>
+</svg>

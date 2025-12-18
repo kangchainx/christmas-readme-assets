@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Ornament ball">
+  <defs>
+    <linearGradient id="ornRed" x1="0" y1="14" x2="0" y2="56">
+      <stop offset="0" stop-color="#fb7185" />
+      <stop offset="1" stop-color="#ef4444" />
+    </linearGradient>
+    <linearGradient id="capMetal" x1="0" y1="6" x2="0" y2="18">
+      <stop offset="0" stop-color="#f8fafc" />
+      <stop offset="1" stop-color="#94a3b8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sway (looping) -->
+  <g transform-origin="32 32">
+    <animateTransform attributeName="transform" type="rotate" values="-6 32 32; 6 32 32; -6 32 32" dur="2.6s" repeatCount="indefinite" />
+
+    <!-- Ball -->
+    <circle cx="32" cy="32" r="18" fill="url(#ornRed)" stroke="#fff" stroke-width="1.6" />
+    <path d="M26 20C21 28 21 36 26 44" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.22">
+      <animate attributeName="opacity" values="0.14;0.28;0.14" dur="2.6s" repeatCount="indefinite" />
+    </path>
+
+    <!-- Tiny star (twinkle) -->
+    <path
+      d="M32 30l1.6 3.6 3.9.6-2.8 2.8.6 3.9-3.3-1.9-3.3 1.9.6-3.9-2.8-2.8 3.9-.6z"
+      fill="#fde68a"
+      stroke="#fff"
+      stroke-width="1"
+      stroke-linejoin="round"
+      opacity="0.9"
+    >
+      <animate attributeName="opacity" values="0.55;1;0.55" dur="1.4s" repeatCount="indefinite" />
+    </path>
+  </g>
+</svg>
