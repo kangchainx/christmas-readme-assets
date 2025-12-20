@@ -125,6 +125,10 @@ Return only the SVG code (no markdown). Keep it self-contained (no external asse
 - Background: transparent
 - Colors: prefer red (`#ef4444`, `#dc2626`), green (`#22c55e`, `#15803d`), white
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=kangchainx/github-christmas-kit&type=date&legend=top-left)](https://www.star-history.com/#kangchainx/github-christmas-kit&type=date&legend=top-left)
+
 ## License
 
 MIT — see `LICENSE`.
