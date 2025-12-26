@@ -1,4 +1,4 @@
-![GitHub Profile Christmas Kit](assets/hero.png)
+![github-christmas-kit](https://socialify.git.ci/kangchainx/github-christmas-kit/image?custom_language=React&description=1&font=KoHo&language=1&name=1&owner=1&pattern=Solid&theme=Auto)
 
 <div align="center">
   <img src="https://img.shields.io/github/license/kangchainx/github-christmas-kit?style=flat&label=license&labelColor=555555&color=97CA00" alt="license" />
